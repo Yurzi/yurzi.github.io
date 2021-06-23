@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yurzi’s Blog</title>
+  <icon>https://blog.yurzi.net/icon.png</icon>
+  <subtitle>幻之梦境</subtitle>
+  <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
+  
+  <link href="https://blog.yurzi.net/"/>
+  <updated>2021-06-19T14:16:33.050Z</updated>
+  <id>https://blog.yurzi.net/</id>
+  
+  <author>
+    <name>Yurzi</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构-第七次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/43cd80f5/"/>
+    <id>https://blog.yurzi.net/posts/43cd80f5/</id>
+    <published>2021-06-19T13:44:10.000Z</published>
+    <updated>2021-06-19T14:16:33.050Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题序列调度&quot;&gt;
+          &lt;a href=&quot;#第一题序列调度&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题序列调度&quot;&gt;&lt;/a&gt; 第一题:序列调度&lt;/h2&gt;
+      
+&lt;p&gt;有一个N个数的序列A：1，2，……，N。有一个后进先出容器D，容器的容量为C。如果给出一个由1到N组成的序列，那么可否由A使用容器D的插入和删除操作得到。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第七次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第七次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第七次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式 &lt;img align=&quot;right&quot; src=&quot;/posts/43cd80f5/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，2个整数T和C，空格分隔，分别表示询问的组数和容器的容量，1≤T≤10，1≤C≤N。&lt;/p&gt;
+&lt;p&gt;第2到T+1行，每行的第1个整数N，表示序列的元素数，1≤N≤10000。接下来N个整数，表示询问的序列。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;T行。若第i组的序列能得到，第i行输出Yes；否则，第i行输出No,1≤i≤T。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5 1 2 5 4 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4 1 3 2 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;No&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第六次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E5%85%AD%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-第六次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/b06eb357/"/>
+    <id>https://blog.yurzi.net/posts/b06eb357/</id>
+    <published>2021-06-13T03:13:32.000Z</published>
+    <updated>2021-06-19T13:16:38.860Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题高精度数加法&quot;&gt;
+          &lt;a href=&quot;#第一题高精度数加法&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题高精度数加法&quot;&gt;&lt;/a&gt; 第一题:高精度数加法&lt;/h2&gt;
+      
+&lt;p&gt;高精度数是指大大超出了标准数据类型能表示的范围的数，例如10000位整数。很多计算问题的结果都很大，因此，高精度数极其重要。&lt;/p&gt;
+&lt;p&gt;一般使用一个数组来存储高精度数的所有数位，数组中的每个元素存储该高精度数的1位数字或多位数字。 请尝试计算：N个高精度数的加和。这个任务对于在学习数据结构的你来说应该是小菜一碟。 。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第六次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第六次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第六次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式 &lt;img align=&quot;right&quot; src=&quot;/posts/b06eb357/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，1个整数N，表示高精度整数的个数，(1≤N≤10000)。&lt;/p&gt;
+&lt;p&gt;第2至N+1行，每行1个高精度整数x, x最多100位。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;1行,1个高精度整数，表示输入的N个高精度数的加和。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12345678910&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12345678910&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12345678910&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;37037036730&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第六次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E5%85%AD%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-第五次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/8c2fd6d9/"/>
+    <id>https://blog.yurzi.net/posts/8c2fd6d9/</id>
+    <published>2021-06-13T03:13:14.000Z</published>
+    <updated>2021-06-19T13:16:38.862Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题图的深度优先搜索-i&quot;&gt;
+          &lt;a href=&quot;#第一题图的深度优先搜索-i&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题图的深度优先搜索-i&quot;&gt;&lt;/a&gt; 第一题:图的深度优先搜索 Ⅰ&lt;/h2&gt;
+      
+&lt;p&gt;无向图 G 有 n 个顶点和 m 条边。求图G的深度优先搜索树(森林)以及每个顶点的发现时间和完成时间。每个连通分量从编号最小的结点开始搜索，邻接顶点选择顺序遵循边的输入顺序。&lt;/p&gt;
+&lt;p&gt;在搜索过程中，第一次遇到一个结点，称该结点被发现；一个结点的所有邻接结点都搜索完，该结点的搜索被完成。深度优先搜索维护一个时钟，时钟从0开始计数，结点被搜索发现或完成时，时钟计数增1，然后为当前结点盖上时间戳。一个结点被搜索发现和完成的时间戳分别称为该结点的发现时间和完成时间&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第五次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第五次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第五次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式  &lt;img align=&quot;right&quot; src=&quot;/posts/8c2fd6d9/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，2个整数n和m，用空格分隔，分别表示顶点数和边数， 1≤n≤50000， 1≤m≤100000.&lt;/p&gt;
+&lt;p&gt;第2到m+1行，每行两个整数u和v，用空格分隔，表示顶点u到顶点v有一条边，u和v是顶点编号，1≤u,v≤n.&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;第1到n行，每行两个整数di和fi，用空格分隔，表示第i个顶点的发现时间和完成时间1≤i≤n 。&lt;/p&gt;
+&lt;p&gt;第n+1行，1个整数 k ，表示图的深度优先搜索树(森林)的边数。&lt;/p&gt;
+&lt;p&gt;第n+2到n+k+1行，每行两个整数u和v,表示深度优先搜索树(森林)的一条边&amp;lt;u,v&amp;gt;，边的输出顺序按 v 结点编号从小到大。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;6 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5 6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1 6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7 12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8 11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9 10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5 6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第五次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E4%BA%94%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WIN10+Qt6+Clion环境配置及部分错误处理</title>
+    <link href="https://blog.yurzi.net/posts/fcea146/"/>
+    <id>https://blog.yurzi.net/posts/fcea146/</id>
+    <published>2021-05-31T15:18:01.000Z</published>
+    <updated>2021-06-19T13:16:38.852Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;
+          &lt;a href=&quot;#写在前面&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#写在前面&quot;&gt;&lt;/a&gt; 写在前面&lt;/h2&gt;
+      
+
+        &lt;h3 id=&quot;动因&quot;&gt;
+          &lt;a href=&quot;#动因&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#动因&quot;&gt;&lt;/a&gt; 动因&lt;/h3&gt;
+      
+&lt;p&gt;最近因为需要，要使用Qt，打开Qt官网一看好家伙已经Qt6了，鉴于用新不用旧 &lt;s&gt;&lt;em&gt;（作死）&lt;/em&gt;&lt;/s&gt; 的原则，决定整个Qt6。而网上的教程多为Qt5，虽然大差不差，但仍有区别，踩了不少的坑，故撰写此教程&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="技术与经验" scheme="https://blog.yurzi.net/categories/%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%BB%8F%E9%AA%8C/"/>
+    
+    <category term="c++" scheme="https://blog.yurzi.net/categories/%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%BB%8F%E9%AA%8C/c/"/>
+    
+    <category term="qt" scheme="https://blog.yurzi.net/categories/%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%BB%8F%E9%AA%8C/c/qt/"/>
+    
+    
+    <category term="技术" scheme="https://blog.yurzi.net/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="c++" scheme="https://blog.yurzi.net/tags/c/"/>
+    
+    <category term="Qt" scheme="https://blog.yurzi.net/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-第四次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/4492febb/"/>
+    <id>https://blog.yurzi.net/posts/4492febb/</id>
+    <published>2021-05-29T09:12:06.000Z</published>
+    <updated>2021-06-21T13:16:08.076Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题&quot;&gt;
+          &lt;a href=&quot;#第一题&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题&quot;&gt;&lt;/a&gt; 第一题:&lt;/h2&gt;
+      
+&lt;p&gt;无向图 G 有 n 个顶点和 m 条边。求 G 的连通分量的数目。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第四次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第四次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第四次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式 &lt;img align=&quot;right&quot; src=&quot;/posts/4492febb/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，2个整数n和m，用空格分隔，分别表示顶点数和边数， 1≤n≤50000， 1≤m≤100000.&lt;br&gt;
+第2到m+1行，每行两个整数u和v，用空格分隔，表示顶点u到顶点v有一条边，u和v是顶点编号，1≤u,v≤n.&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;1行，1个整数，表示所求连通分量的数目。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;p&gt;在这里给出一组输入。例如：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;6 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5 6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;p&gt;在这里给出相应的输出。例如：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第四次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E5%9B%9B%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-第三次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/b77e3ad9/"/>
+    <id>https://blog.yurzi.net/posts/b77e3ad9/</id>
+    <published>2021-05-19T13:56:21.000Z</published>
+    <updated>2021-06-19T13:16:38.858Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题二叉树最长路径&quot;&gt;
+          &lt;a href=&quot;#第一题二叉树最长路径&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题二叉树最长路径&quot;&gt;&lt;/a&gt; 第一题:二叉树最长路径&lt;/h2&gt;
+      
+&lt;p&gt;给定一颗二叉树，求T中的最长路径的长度，并输出此路径上各个节点的值，若有多条路径，输出最右侧的那条。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第三次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第三次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第三次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式 &lt;img align=&quot;right&quot; src=&quot;/posts/b77e3ad9/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，1个整数n，表示二叉树有n个结点， 1≤n≤100000.&lt;br&gt;
+第2行，2n+1个整数，用空格分隔，表示T的扩展先根序列， -1表示空指针，结点用编号1到n表示。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;第1行，1个整数length，length表示T中的最长路径的长度。&lt;br&gt;
+第2行，length+1个整数，用空格分隔，表示最右侧的最长路径&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 2 -1 -1 3 4 -1 -1 5 -1 -1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 3 5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第三次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E4%B8%89%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-第二次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/191b7708/"/>
+    <id>https://blog.yurzi.net/posts/191b7708/</id>
+    <published>2021-05-15T13:33:57.000Z</published>
+    <updated>2021-06-19T13:16:38.859Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题数列查询&quot;&gt;
+          &lt;a href=&quot;#第一题数列查询&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题数列查询&quot;&gt;&lt;/a&gt; 第一题:数列查询&lt;/h2&gt;
+      
+&lt;p&gt;已知数列的通项公式为:&lt;/p&gt;
+&lt;p&gt;f(n) = f(n-1)*11/10，f[1]=10.&lt;/p&gt;
+&lt;p&gt;通向从左向右计算，*和/分别表示整数乘法和除法。 现在，要多次查询数列项的值。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式-img-alignright-src数据结构-第二次解题报告1png&quot;&gt;
+          &lt;a href=&quot;#输入格式-img-alignright-src数据结构-第二次解题报告1png&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式-img-alignright-src数据结构-第二次解题报告1png&quot;&gt;&lt;/a&gt; 输入格式 &lt;img align=&quot;right&quot; src=&quot;/posts/191b7708/1.png&quot;&gt;&lt;/h3&gt;
+      
+&lt;p&gt;第1行，1个整数q，表示查询的次数， 1≤q≤10000. 第2至q+1行，每行1个整数i，表示要查询f(i)的值。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;q行，每行1个整数，表示f(i)的值。查询的值都在32位整数范围内。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;p&gt;这里给出一组输入，例如:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;p&gt;这里给出相应的输出，例如：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第二次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构:第一次解题报告</title>
+    <link href="https://blog.yurzi.net/posts/a62b4006/"/>
+    <id>https://blog.yurzi.net/posts/a62b4006/</id>
+    <published>2021-05-12T14:43:18.000Z</published>
+    <updated>2021-06-19T13:16:38.868Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;第一题重复计数&quot;&gt;
+          &lt;a href=&quot;#第一题重复计数&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第一题重复计数&quot;&gt;&lt;/a&gt; 第一题:重复计数&lt;/h2&gt;
+      
+&lt;p&gt;在一个有限的正整数序列中，有些数会多次重复出现。请你统计每个数的出现次数，然后按数字在序列中第一次出现的位置顺序输出数及其次数。&lt;br&gt;
+&lt;img align=&quot;right&quot; src=&quot;/posts/a62b4006/first.png&quot;&gt;&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式&quot;&gt;
+          &lt;a href=&quot;#输入格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式&quot;&gt;&lt;/a&gt; 输入格式&lt;/h3&gt;
+      
+&lt;p&gt;第1行，1个整数N，表示整数的个数，(1≤N≤50000)。&lt;br&gt;
+第2行，N个正整数，每个整数x 都满足 1 ≤ x ≤2000000000。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;若干行，每行两个用一个空格隔开的数，第一个是数列中出现的数，第二个是该数在序列中出现的次数。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;p&gt;在这里给出一组输入。例如:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8 2 8 2 2 11 1 1 8 1 13 13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;p&gt;在这里给出相应的输出。例如:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;8 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13 2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
+    
+    <category term="第一次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最大连续子序列和</title>
+    <link href="https://blog.yurzi.net/posts/7e7e02b7/"/>
+    <id>https://blog.yurzi.net/posts/7e7e02b7/</id>
+    <published>2021-05-09T05:46:01.000Z</published>
+    <updated>2021-06-19T13:16:38.865Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+
+        &lt;h2 id=&quot;题目最喜爱的序列&quot;&gt;
+          &lt;a href=&quot;#题目最喜爱的序列&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#题目最喜爱的序列&quot;&gt;&lt;/a&gt; 题目:最喜爱的序列&lt;/h2&gt;
+      
+&lt;p&gt;小唐这段时间在研究序列。拿来N个整数的序列，他给序列中的每个整数都赋予一个喜爱值。喜爱值也是整数，有正有负，越大表明越喜欢。他想知道，如何从序列中连续取最多m个数，他获得喜爱值最大。1≤N≤500000，1≤m≤N。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入格式&quot;&gt;
+          &lt;a href=&quot;#输入格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式&quot;&gt;&lt;/a&gt; 输入格式&lt;/h3&gt;
+      
+&lt;p&gt;第一行是两个整数N,m。分别代表序列中数的个数以及能取的最多个数。&lt;br&gt;
+第二行用空格隔开的N个整数，第i个整数Li代表他对第i个数的喜爱值。│Li│≤1000&lt;/p&gt;
+
+        &lt;h3 id=&quot;输出格式&quot;&gt;
+          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
+      
+&lt;p&gt;一行，三个数，表示获得最大喜爱值，及第一个取最大喜爱值的区间。&lt;/p&gt;
+
+        &lt;h3 id=&quot;输入样例&quot;&gt;
+          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;5 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 4 5 2 3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h3 id=&quot;输出样例&quot;&gt;
+          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
+      
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;9 2 3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="应用" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BA%94%E7%94%A8/"/>
+    
+    <category term="最大连续子序列的和" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BA%94%E7%94%A8/%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%92%8C/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="应用" scheme="https://blog.yurzi.net/tags/%E5%BA%94%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人博客搭建历程</title>
+    <link href="https://blog.yurzi.net/posts/bf7e5576/"/>
+    <id>https://blog.yurzi.net/posts/bf7e5576/</id>
+    <published>2021-05-01T13:41:33.000Z</published>
+    <updated>2021-06-19T13:16:38.856Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+
+        &lt;h2 id=&quot;萌芽&quot;&gt;
+          &lt;a href=&quot;#萌芽&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#萌芽&quot;&gt;&lt;/a&gt; 萌芽&lt;/h2&gt;
+      
+&lt;p&gt;第一次想到要搭建一个个人主页是在7年前，当时看到有个B站的up主整了个个人主页来发布资源，我就想着我也想并应该能整一个。于是乎一场历时将近7年的技术积累开始了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="经历" scheme="https://blog.yurzi.net/categories/%E7%BB%8F%E5%8E%86/"/>
+    
+    
+    <category term="Linux" scheme="https://blog.yurzi.net/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>洛玖只的学生日常-第一章</title>
+    <link href="https://blog.yurzi.net/posts/b78dffe7/"/>
+    <id>https://blog.yurzi.net/posts/b78dffe7/</id>
+    <published>2021-05-01T04:39:22.000Z</published>
+    <updated>2021-06-19T13:16:38.867Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+
+        &lt;h2 id=&quot;九阳豆浆机&quot;&gt;
+          &lt;a href=&quot;#九阳豆浆机&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#九阳豆浆机&quot;&gt;&lt;/a&gt; 九阳豆浆机&lt;/h2&gt;
+      
+&lt;p&gt;相传在上古时期，后羿射日之时，天上的九个太阳落下后，汇聚起来化作了一台豆浆机，拥有可怕的威能。&lt;br&gt;
+这台豆浆机，自出现后，便再无音讯，遗失在苍茫的宇宙中，难以寻觅，是为传说中的上古先天神器。&lt;/p&gt;
+&lt;p&gt;而现在，在这教室里，九阳豆浆机就在考列考拉夫斯基的手上，并向我们炫耀其造型之精美。我们虽然对此感到怀疑，但是其造型确实精美好看，&lt;br&gt;
+寒冬的阳光，透过朦胧的紧闭的玻璃窗，在了豆浆机上，让洁白的陶瓷质的光滑外壳，亮的有些闪眼；&lt;br&gt;
+镀银的提手，低调奢华有内涵；盖子银质镶圈，带有一个用金丝勾勒出的九阳界面，&lt;br&gt;
+在封闭的教室中，在水汽的氤氲下，显得十分的富丽堂皇，并有一种仙气，超然脱俗。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="小说" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="洛玖只的日常" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="第一章" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+    
+    
+    <category term="小说" scheme="https://blog.yurzi.net/tags/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="洛玖只的学生日常" scheme="https://blog.yurzi.net/tags/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E5%AD%A6%E7%94%9F%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>洛玖只的学生日常-前言</title>
+    <link href="https://blog.yurzi.net/posts/c96fa57/"/>
+    <id>https://blog.yurzi.net/posts/c96fa57/</id>
+    <published>2021-05-01T04:29:50.000Z</published>
+    <updated>2021-06-19T13:16:38.866Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+
+        &lt;h2 id=&quot;写在前面&quot;&gt;
+          &lt;a href=&quot;#写在前面&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="小说" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="洛玖只的日常" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="前言" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/%E5%89%8D%E8%A8%80/"/>
+    
+    
+    <category term="小说" scheme="https://blog.yurzi.net/tags/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="洛玖只的学生日常" scheme="https://blog.yurzi.net/tags/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E5%AD%A6%E7%94%9F%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+</feed>

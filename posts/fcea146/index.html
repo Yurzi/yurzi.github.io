@@ -1,0 +1,684 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2.6.2" sizes="180x180"><link rel="mask-icon" href="/%5Bobject%20Object%5D?v=2.6.2" color="#54bcff"><meta name="msapplication-TileImage" content="/%5Bobject%20Object%5D"><meta name="msapplication-TileColor" content="#000000"><meta name="google-site-verification" content="wLsuzxylkZJm7jScjZbLsimcG5pdDR_WI3lbU1LrNJg"><meta name="baidu-site-verification" content="code-bRddUSikg2"><meta name="description" content="写在前面                             动因        最近因为需要，要使用Qt，打开Qt官网一看好家伙已经Qt6了，鉴于用新不用旧 （作死） 的原则，决定整个Qt6。而网上的教程多为Qt5，虽然大差不差，但仍有区别，踩了不少的坑，故撰写此教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WIN10+Qt6+Clion环境配置及部分错误处理">
+<meta property="og:url" content="https://blog.yurzi.net/posts/fcea146/">
+<meta property="og:site_name" content="Yurzi’s Blog">
+<meta property="og:description" content="写在前面                             动因        最近因为需要，要使用Qt，打开Qt官网一看好家伙已经Qt6了，鉴于用新不用旧 （作死） 的原则，决定整个Qt6。而网上的教程多为Qt5，虽然大差不差，但仍有区别，踩了不少的坑，故撰写此教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/download_1.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/download_2.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/download_3.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_1.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_2.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_3.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_4.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_5.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setup_6.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/setenv_1.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/toolchains.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/project.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/qtdesigner.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/fcea146/problem1.png">
+<meta property="article:published_time" content="2021-05-31T15:18:01.000Z">
+<meta property="article:modified_time" content="2021-06-19T13:16:38.852Z">
+<meta property="article:author" content="Yurzi">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yurzi.net/posts/fcea146/download_1.png"><title>WIN10+Qt6+Clion环境配置及部分错误处理 | Yurzi’s Blog</title><link ref="canonical" href="https://blog.yurzi.net/posts/fcea146/"><link rel="alternate" href="/rss.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><script src="https://www.googletagmanager.com/gtag/js?id=G-M43B6Q6Q25" async="" data-pjax=""></script><script data-pjax="">if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-M43B6Q6Q25');
+}</script><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: true,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: {"colWidth":"220px","gapX":"10px"},
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-feather-alt"></i></span><span class="header-nav-menu-item__text">文章</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/archives/"><span class="header-nav-submenu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-submenu-item__text">归档</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/categories/"><span class="header-nav-submenu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-submenu-item__text">分类</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/tags/"><span class="header-nav-submenu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-submenu-item__text">标签</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-heart"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">WIN10+Qt6+Clion环境配置及部分错误处理</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-05-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-06-19</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.2k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">20分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><h2 id="写在前面">
+          <a href="#写在前面" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2>
+      
+
+        <h3 id="动因">
+          <a href="#动因" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#动因"></a> 动因</h3>
+      
+<p>最近因为需要，要使用Qt，打开Qt官网一看好家伙已经Qt6了，鉴于用新不用旧 <s><em>（作死）</em></s> 的原则，决定整个Qt6。而网上的教程多为Qt5，虽然大差不差，但仍有区别，踩了不少的坑，故撰写此教程</p>
+<span id="more"></span>
+
+        <h2 id="qt6">
+          <a href="#qt6" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#qt6"></a> Qt6</h2>
+      
+
+        <h3 id="介绍">
+          <a href="#介绍" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
+      
+<p>Qt6是Qt最新推出的版本，相较于Qt5做了一些删减，并增加了新的功能和模块，以适用于未来应用程序的开发。</p>
+<p>Qt是一个跨平台的C<ins>图形界面应用程序框架，提供给开发者建立炫酷图形界面的所需的所有功能，能极大的方便c</ins>跨平台GUI程序的开发</p>
+
+        <h3 id="下载">
+          <a href="#下载" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#下载"></a> 下载</h3>
+      
+<p>目前Qt的最新LTS版本是6.1.0，~~<em>可以</em>~~只能前往<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.qt.io/product/qt6">官网</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>下载，因为Qt从从5.15版本开始就不支持离线安装包了，所以只能去官网下载了，Qt5时期流行的<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/">清华镜像源</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>虽然也有6.1版本但是qt-everywhere，并没有用过，所以还是推荐官网下载</p>
+<p>其实现在可能有国内节点的缘故，安装速度并不慢了。</p>
+<p>1.进入<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.qt.io/product/qt6">官网</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，点击Download now</p>
+<img src="/posts/fcea146/download_1.png" alt="download_1" style="zoom:80%;">
+<p>2.下拉网页，这里我们选择Downloads for open source users，这是开源的Qt，开源协议为(L)GPL</p>
+<img src="/posts/fcea146/download_2.png" alt="download_2" style="zoom:80%;">
+<p>3.然后填写相关的信息</p>
+<img src="/posts/fcea146/download_3.png" alt="download_3" style="zoom:80%;">
+
+    <div class="note-plugin info no-icon">
+      
+      <p><strong>注意</strong></p><p>这个流程是必须做的，并且一定要是有效邮箱，其他无所谓，这一步其实是会创建一个Qt账号，如果你已经有Qt账号了，你可以在此表单的最下面找到登录。</p><p>这个账号会在后续安装的过程中用到。</p>
+    </div>
+  
+<p>3.注册后（登录账号）即可下载到安装器了</p>
+
+        <h3 id="安装">
+          <a href="#安装" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#安装"></a> 安装</h3>
+      
+<p>1.打开下载好的在线安装器，输入下载时使用的账号和密码</p>
+<p><img src="/posts/fcea146/setup_1.png" alt=""></p>
+<p>2.确认同意(L)GPL协议，你也可以把NULL删掉然后勾选个人用户(如果是的话)，但是这不重要。</p>
+<p><img src="/posts/fcea146/setup_2.png" alt=""></p>
+<p>3.下一步，等待一会（不必科学上网），再下一步，此处为询问是否提供信息以改良Qt，这无所谓。随便选一个</p>
+<img src="/posts/fcea146/setup_3.png" alt="setup_3" style="zoom:80%;">
+<p>4.选择安装选项，这一步设置安装路径，然后选择Custom installation，当然，也可以直接勾选下面的预设。这里我选择Custom installation.</p>
+<img src="/posts/fcea146/setup_4.png" alt="setup_4" style="zoom:80%;">
+<p>5.直接勾选Qt目录下的Qt6.1.0，如果不开发安卓应用可以取消选择Android，选择好后下一步。</p>
+<img src="/posts/fcea146/setup_5.png" alt="setup_5" style="zoom:80%;">
+<p>6.这一步主要是同意证书，同意即可</p>
+<img src="/posts/fcea146/setup_6.png" alt="setup_6" style="zoom:80%;">
+<p>7.下一步至开始安装即可，安装过程没必要科学上网，个人下载的速度挺快的，等待安装完成，那么Qt的安装就完成了</p>
+
+        <h2 id="系统环境配置">
+          <a href="#系统环境配置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#系统环境配置"></a> 系统环境配置</h2>
+      
+
+        <h3 id="qt文件结构">
+          <a href="#qt文件结构" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#qt文件结构"></a> Qt文件结构</h3>
+      
+<figure class="highlight text"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Qt--|-6.1.0		关键的对应平台的模块、库和环境文件，还有各自的Qtdesigner</span><br><span class="line">	  --|-Src</span><br><span class="line">	    |-mingw81_64	通用的环境</span><br><span class="line">	    |-msvc2019_64	针对msvc的环境</span><br><span class="line">	    |-android_arm64_v8a</span><br><span class="line">	    |-android_armwv7</span><br><span class="line">	    |-android_x86</span><br><span class="line">	    |-android_x86_64</span><br><span class="line">	    |-sha1.txt</span><br><span class="line">	|-dist</span><br><span class="line">	|-Docs	帮助手册</span><br><span class="line">	|-Examples	样例</span><br><span class="line">	|-installerResources	安装资源</span><br><span class="line">	|-Lienses	证书</span><br><span class="line">	|-Tools		Qt所使用的工具，包括编译器、Cmake以及QtCreator等</span><br><span class="line">	|-vcredist</span><br><span class="line">	|-MaintenanceTools.exe	模块管理工具</span><br><span class="line">	|-...其他一些琐碎的文件</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="系统变量设置">
+          <a href="#系统变量设置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#系统变量设置"></a> 系统变量设置</h3>
+      
+<p>其实可以不用设置，如果不用命令行，只用可视化界面来使用Qt的话。但是考虑到刚出炉没打包依赖库程序的运行应当设置环境。</p>
+<p>如果你使用mingw，那么应该在系统的用户环境变量中的Path中，添加如下2行，<strong><font color="#FF0000">注意顺序</font></strong></p>
+<p>其次，可以注意到这里我自己装有mingw64，所以<font color="#FF0000"><strong>为了不污染Qt的库，我将Qt的路径上移到了mingw64的上方，这很重要，后续出现的很多问题都是环境变量配置不当引起的.</strong></font></p>
+<p><img src="/posts/fcea146/setenv_1.png" alt="setenv_1"></p>
+<p>设置完环境变量，Qt环境算是完全配置完成了</p>
+<p>如果你使用msvc的话，只要将Qt文件里msvc对应的路径添加进path即可。</p>
+<p>至此你已经可以用QtCreator来编写Qt应用程序了，可是Clion这么好用，为什么不用Clion呢。</p>
+
+        <h2 id="clionqt相关配置">
+          <a href="#clionqt相关配置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#clionqt相关配置"></a> Clion+Qt相关配置</h2>
+      
+
+        <h3 id="clion的下载和安装">
+          <a href="#clion的下载和安装" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#clion的下载和安装"></a> Clion的下载和安装</h3>
+      
+<p>自行解决。</p>
+
+        <h3 id="添加工具链可选">
+          <a href="#添加工具链可选" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#添加工具链可选"></a> 添加工具链(可选)</h3>
+      
+<p>此版本Qt使用的编译器mingw81_64，以及msvc2019_64等，如果你的Clion中已经有对应版本的自己安装的工具链，可以不增加Qt提供的工具链,关键的是之后的CMakeLists.txt的配置。</p>
+<p>但是，还是推荐使用Qt提供的工具链，以免发生不要的错误~~*(诶<sub>就是玩)*</sub>~。</p>
+<p>此处使用mingw为例，若无特殊说明，此后均以mingw为例，msvc与此大同小异。</p>
+<p>1.打开Clion设置找到工具链(Toolchains),按"+"号，添加一个MinGW的工具链，如图</p>
+<p>名称(Name)随意，环境(Environment)填写，Qt目录下Tools里对应的文件夹，如这里是Qt\Tools\mingw810_64，</p>
+<p>Tools里并没有msvc的编译器，如果想在Clion里用msvc构建Qt项目，请安装VS2019，然后在Clion中添加msvc的工具链</p>
+<img src="/posts/fcea146/toolchains.png" alt="toolchains" style="zoom:80%;">
+
+        <h3 id="创建qt工程">
+          <a href="#创建qt工程" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#创建qt工程"></a> 创建Qt工程</h3>
+      
+<p>Clion自某一版本后原生支持创建Qt工程，在新建项目中选择即可。</p>
+<p>这里有2个选项分别对应的是Qt的控制台应用(类似于是无GUI的命令行)和微件应用(GUI图形界面)</p>
+<img src="/posts/fcea146/project.png" alt="project" style="zoom:80%;">
+<p>选择微件应用，设置好相应的属性，创建即可。</p>
+<p>这里的Qt CMake前缀路径不用设置，因为这样生成的CMakeLists.txt是针对Linux平台的，对于Win10系统这个CMakeLists文件大有问题。后期需要修改。</p>
+
+        <h3 id="cmakeliststxt的配置">
+          <a href="#cmakeliststxt的配置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#cmakeliststxt的配置"></a> CMakeLists.txt的配置</h3>
+      
+<p>其实Clion的项目主要靠的就是CMakeLists.txt，只要这个配置对了，创建项目时的选择并不重要，所以其实上一步某种意义上作用不大。</p>
+<p>这里给出我的CMakeLists.txt</p>
+<figure class="highlight cmake"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置项目名称，如此处为MapFind</span></span><br><span class="line"><span class="keyword">project</span>(MapFind VERSION <span class="number">0.1</span> LANGUAGES CXX)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INCLUDE_CURRENT_DIR <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打开自动UIC MOC RCC</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOUIC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOMOC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTORCC <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置C++标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">20</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置CMake前缀路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="string">"D:/Packages/Qt/6.1.0/mingw81_64/lib/cmake"</span>)  <span class="comment">#这很重要，直接关系到能否构建，如这里是设置到Qt/6.1.0/mingw81_64/lib/cmake</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># QtCreator supports the following variables for Android, which are identical to qmake Android variables.</span></span><br><span class="line"><span class="comment"># Check https://doc.qt.io/qt/deployment-android.html for more information.</span></span><br><span class="line"><span class="comment"># They need to be set before the find_package( ...) calls below.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#if(ANDROID)</span></span><br><span class="line"><span class="comment">#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")</span></span><br><span class="line"><span class="comment">#    if (ANDROID_ABI STREQUAL "armeabi-v7a")</span></span><br><span class="line"><span class="comment">#        set(ANDROID_EXTRA_LIBS</span></span><br><span class="line"><span class="comment">#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so</span></span><br><span class="line"><span class="comment">#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)</span></span><br><span class="line"><span class="comment">#    endif()</span></span><br><span class="line"><span class="comment">#endif()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(Qt<span class="variable">${QT_VERSION_MAJOR}</span> COMPONENTS Widgets REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(PROJECT_SOURCES</span><br><span class="line">        main.cpp</span><br><span class="line">        MapMainwindow.cpp MapMainwindow.h mapmainwindow.ui MapItem.cpp MapItem.h)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">${QT_VERSION_MAJOR}</span> <span class="keyword">GREATER_EQUAL</span> <span class="number">6</span>)</span><br><span class="line">    qt_add_executable(<span class="variable">${PROJECT_NAME}</span></span><br><span class="line">            MANUAL_FINALIZATION</span><br><span class="line">            <span class="variable">${PROJECT_SOURCES}</span></span><br><span class="line">            )</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">    <span class="keyword">if</span> (ANDROID)</span><br><span class="line">        <span class="keyword">add_library</span>(<span class="variable">${PROJECT_NAME}</span> SHARED</span><br><span class="line">                <span class="variable">${PROJECT_SOURCES}</span></span><br><span class="line">                )</span><br><span class="line">    <span class="keyword">else</span> ()</span><br><span class="line">        <span class="keyword">add_executable</span>(<span class="variable">${PROJECT_NAME}</span></span><br><span class="line">                <span class="variable">${PROJECT_SOURCES}</span></span><br><span class="line">                )</span><br><span class="line">    <span class="keyword">endif</span> ()</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">${PROJECT_NAME}</span> PRIVATE Qt<span class="variable">${QT_VERSION_MAJOR}</span>::Widgets)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set_target_properties</span>(<span class="variable">${PROJECT_NAME}</span> PROPERTIES</span><br><span class="line">        MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com</span><br><span class="line">        MACOSX_BUNDLE_BUNDLE_VERSION <span class="variable">${PROJECT_VERSION}</span></span><br><span class="line">        MACOSX_BUNDLE_SHORT_VERSION_STRING <span class="variable">${PROJECT_VERSION_MAJOR}</span>.<span class="variable">${PROJECT_VERSION_MINOR}</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (QT_VERSION_MAJOR <span class="keyword">EQUAL</span> <span class="number">6</span>)</span><br><span class="line">    qt_finalize_executable(<span class="variable">${PROJECT_NAME}</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment">#区别debug和release,以便去除命令行</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">${CMAKE_CXX_COMPILER}</span> <span class="keyword">MATCHES</span> <span class="string">".*/(g\\+\\+)(\\..*)"</span>)</span><br><span class="line">    <span class="keyword">set_target_properties</span>(<span class="variable">${PROJECT_NAME}</span> PROPERTIES LINK_FLAGS_RELEASE <span class="string">"-mwindows"</span>)    <span class="comment">#设置去除命令行</span></span><br><span class="line"><span class="keyword">elseif</span> (<span class="variable">${CMAKE_CXX_COMPILER}</span> <span class="keyword">MATCHES</span> <span class="string">".*/(cl)(\\..*)"</span>)</span><br><span class="line">    <span class="keyword">set_target_properties</span>(<span class="variable">${PROJECT_NAME}</span> PROPERTIES LINK_FLAGS_RELEASE <span class="string">"/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+<p>其实可以使用QtCreaor来创建项目，只需要在创建项目是选择构建器为cmake，而不是qmake，然后使用Clion打开也可，此CMakeLists.txt也是根据QtCreator生成的文件修改而来。</p>
+<p>2.为了方便以后的项目创建我们还可以把这个制作为Clion的文件模板。如何添加模板可自行解决。</p>
+<p>这里给出模板：</p>
+<figure class="highlight cmake"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#自动设置项目名称</span></span><br><span class="line"><span class="keyword">project</span>(<span class="variable">${PROJECT_NAME}</span> VERSION <span class="number">0.1</span> LANGUAGES CXX)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INCLUDE_CURRENT_DIR <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打开相应的UIC MOC RCC</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOUIC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOMOC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTORCC <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置c++标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">20</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"><span class="comment">#设置CMake前缀路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="string">"D:/Packages/Qt/6.1.0/mingw81_64/lib/cmake"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># QtCreator supports the following variables for Android, which are identical to qmake Android variables.</span></span><br><span class="line"><span class="comment"># Check https://doc.qt.io/qt/deployment-android.html for more information.</span></span><br><span class="line"><span class="comment"># They need to be set before the find_package( ...) calls below.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#[[#if]]#(ANDROID)</span></span><br><span class="line"><span class="comment">#    set(ANDROID_PACKAGE_SOURCE_DIR "#[[${CMAKE_CURRENT_SOURCE_DIR}]]#/android")</span></span><br><span class="line"><span class="comment">#    if (ANDROID_ABI STREQUAL "armeabi-v7a")</span></span><br><span class="line"><span class="comment">#        set(ANDROID_EXTRA_LIBS</span></span><br><span class="line"><span class="comment">#            #[[${CMAKE_CURRENT_SOURCE_DIR}]]#/path/to/libcrypto.so</span></span><br><span class="line"><span class="comment">#            #[[${CMAKE_CURRENT_SOURCE_DIR}]]#/path/to/libssl.so)</span></span><br><span class="line"><span class="comment">#    endif()</span></span><br><span class="line"><span class="comment">#[[#endif]]#()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(Qt<span class="comment">#[[${QT_VERSION_MAJOR}]]# COMPONENTS Widgets REQUIRED)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(PROJECT_SOURCES</span><br><span class="line">        main.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="comment">#[[${QT_VERSION_MAJOR}]]# GREATER_EQUAL 6)</span></span><br><span class="line">    qt_add_executable(<span class="comment">#[[${PROJECT_NAME}]]#</span></span><br><span class="line">        MANUAL_FINALIZATION</span><br><span class="line">        <span class="comment">#[[${PROJECT_SOURCES}]]#</span></span><br><span class="line">    )</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">if</span>(ANDROID)</span><br><span class="line">        <span class="keyword">add_library</span>(<span class="comment">#[[${PROJECT_NAME}]]# SHARED</span></span><br><span class="line">            <span class="comment">#[[${PROJECT_SOURCES}]]#</span></span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">else</span>()</span><br><span class="line">        <span class="keyword">add_executable</span>(<span class="comment">#[[${PROJECT_NAME}]]#</span></span><br><span class="line">            <span class="comment">#[[${PROJECT_SOURCES}]]#</span></span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="comment">#[[${PROJECT_NAME}]]# PRIVATE Qt#[[${QT_VERSION_MAJOR}]]#::Widgets)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set_target_properties</span>(<span class="comment">#[[${PROJECT_NAME}]]# PROPERTIES</span></span><br><span class="line">    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com</span><br><span class="line">    MACOSX_BUNDLE_BUNDLE_VERSION <span class="comment">#[[${PROJECT_VERSION}]]#</span></span><br><span class="line">    MACOSX_BUNDLE_SHORT_VERSION_STRING <span class="comment">#[[${PROJECT_VERSION_MAJOR}]]#.#[[${PROJECT_VERSION_MINOR}]]#</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(QT_VERSION_MAJOR <span class="keyword">EQUAL</span> <span class="number">6</span>)</span><br><span class="line">    qt_finalize_executable(<span class="comment">#[[${PROJECT_NAME}]]#)</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># 区别debug和release来决定是否去除命令行</span></span><br><span class="line"><span class="keyword">if</span>(<span class="comment">#[[${CMAKE_CXX_COMPILER}]]# MATCHES ".*/(g\\+\\+)(\\..*)")</span></span><br><span class="line">    <span class="keyword">set_target_properties</span>(<span class="comment">#[[${PROJECT_NAME}]]# PROPERTIES LINK_FLAGS_RELEASE "-mwindows")</span></span><br><span class="line"><span class="keyword">elseif</span>(<span class="comment">#[[${CMAKE_CXX_COMPILER}]]# MATCHES ".*/(cl)(\\..*)")</span></span><br><span class="line">    <span class="keyword">set_target_properties</span>(<span class="comment">#[[${PROJECT_NAME}]]# PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="qtdesigner">
+          <a href="#qtdesigner" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#qtdesigner"></a> QtDesigner</h3>
+      
+<p>虽然Clion中不能和在QtCreator上一样直接可视化编辑图形界面文件(ui)文件,但是我们可以通过Clion中的外部工具来实现一键打开调用QtDesigner来实现</p>
+<p>在 “文件”-&gt;“设置”-&gt;“工具”-&gt;“外部工具(External Tools)” 中添加一个工具，如图</p>
+<p>在这里"程序"一栏填写的是我电脑上Qt的MinGW平台下的designer。Qt每个不同的平台都有一个各自的designer，所以要选择对应的平台。</p>
+<img src="/posts/fcea146/qtdesigner.png" alt="qtdesigner" style="zoom:80%;">
+
+        <h3 id="结语">
+          <a href="#结语" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#结语"></a> 结语</h3>
+      
+<p>至此Clion和Qt的联合配置完成了,已经可以开始愉快的在Clion中编写Qt程序了，以及新建Qt项目了。</p>
+<p>总的来说，Clion上项目的管理主要依靠的是CMakeLists.txt文件,只要抓住这个文件，总能解决一些问题</p>
+
+        <h2 id="常见问题及错误">
+          <a href="#常见问题及错误" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#常见问题及错误"></a> 常见问题及错误</h2>
+      
+
+        <h3 id="运行相关">
+          <a href="#运行相关" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#运行相关"></a> 运行相关</h3>
+      
+<p><strong>1.Clion中程序无法直接小箭头运行，错误代码-1073741511(0xC0000139)</strong></p>
+<p>出现这个原因是因为编译出的Qt程序没办法，链接到对应的动态库导致的，目前主要有2种解决办法</p>
+<p>第一种：</p>
+<p>修改系统变量，确保在上述过程中系统变量设置正确，而且前面的路径没有存在Qt库污染环境。注意查看系统的path里有没有，之前有遇到装了matlab在系统的path里写了变量导致无法链接的。</p>
+<p>修改完后重启Clion,乃至系统。</p>
+<p>第二种(推荐且肯定有效)：</p>
+<p>配置Clion"运行/调试配置"的工作目录，往其中填入对应平台的bin文件夹的路径，即可。</p>
+<img src="/posts/fcea146/problem1.png" alt="problem1" style="zoom:80%;">
+<p><strong>2.直接双击运行编译出的exe文件失败</strong></p>
+<p>这个问题同上个问题差不多，就是动态链接库链接失败，可以使用windeployqt工具来将对应的库复制到同目录下解决。如果系统环境被污染了，那就爆炸了，一定一定要正确的系统环境，或者在使用windeployqt前设置命令行的临时环境变量。详情可以查看别的文章</p>
+
+        <h3 id="编译相关">
+          <a href="#编译相关" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#编译相关"></a> 编译相关</h3>
+      
+<p><strong>1.找不到对应包/代码提示与检查无法识别相关类</strong></p>
+<p>大概率是CMakeLists.txt中的前缀路径设置错误，若检查无错，同时使用了例如socket等功能，则是没有在CMakeLists.txt中包含对应的包。可以去Qt官网查找手册，会给出cmake如何加入相关的包.</p>
+<p>此处给出添加network包的示例：</p>
+<figure class="highlight cmake"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(Qt6 COMPONENTS Network REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">${PROJECT_NAME}</span> PRIVATE Qt<span class="variable">${QT_VERSION_MAJOR}</span>::Network)</span><br></pre></td></tr></tbody></table></div></figure>
+<p><strong>2.编译无法识别自建类</strong></p>
+<p>请在cmke文件中的set(PROJECT_SOURCES  main.cpp)中手动添加自建类的相关文件(包括.ui文件)，这个错误主要是因为在文件创建后替换了cmake文件导致IDE无法将已经创建的文件自动加入其中</p>
+
+        <h3 id="发布相关">
+          <a href="#发布相关" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#发布相关"></a> 发布相关</h3>
+      
+<p><strong>1.使用windeployqt后仍无法运行</strong></p>
+<p>这个问题是因为系统环境中有路径内有Qt库污染导致的，强烈建议使用Qt安装后提供的对应平台环境的终端来运行windeployqt，如“Qt 6.1.0 (MinGW 8.1.0 64-bit)”</p>
+<p><strong>2.无法找到其他教程所说的终端窗口</strong></p>
+<p>如果你是在线安装的，可以试试windows10自带的搜索工具</p>
+<p>也可以使用终端(如cmd)运行Qt对应平台环境的bin目录下的qtenv2.bat.</p>
+<p><strong>3.运行qtenv2.bat无法打开指定路径</strong></p>
+<p>该错误一般出现在离线拷贝的Qt6环境，因为qtenv2.bat本质上只是帮你实现了指定临时环境的操作，而其内部是简单的绝对路径设置，在安装时写死了，所以你应该编辑修改qtenv2.bat里的相关路径</p>
+
+        <h3 id="其他问题">
+          <a href="#其他问题" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#其他问题"></a> 其他问题</h3>
+      
+<p>暂无，若有发现会后续补充，也可以在评论区提问</p>
+
+        <h2 id="总结">
+          <a href="#总结" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+      
+<p>Qt6的安装过程以及和Clion的联合配置，其过程需要对环境的配置以及Clion对于项目的管理以及其他功能有一定的研究，对于cmake需要有一定的了解。同时解决一些发生的错误的过程，需要对Qt的文件结构，以及一些入口有一定的了解。</p>
+<p>但是总的来说，虽然是摸着Qt5的教程配置Qt6的过程中还是遇到了许多困难，但是还是最终解决了，同时相关的能力，以及对于系统环境的认识更加的深刻了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://blog.yurzi.net">Yurzi</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://blog.yurzi.net/posts/fcea146/">https://blog.yurzi.net/posts/fcea146/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/c/">c++</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/Qt/">Qt</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/8c2fd6d9/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">数据结构-第五次解题报告</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/4492febb/"><span class="paginator-prev__text">数据结构-第四次解题报告</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="utterances-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">
+           写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">
+           动因</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qt6"><span class="toc-number">2.</span> <span class="toc-text">
+           Qt6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">
+           介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.</span> <span class="toc-text">
+           下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.</span> <span class="toc-text">
+           安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">
+           系统环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#qt%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">
+           Qt文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">
+           系统变量设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clionqt%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">
+           Clion+Qt相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#clion%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85"><span class="toc-number">4.1.</span> <span class="toc-text">
+           Clion的下载和安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%B7%A5%E5%85%B7%E9%93%BE%E5%8F%AF%E9%80%89"><span class="toc-number">4.2.</span> <span class="toc-text">
+           添加工具链(可选)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAqt%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.3.</span> <span class="toc-text">
+           创建Qt工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmakeliststxt%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.4.</span> <span class="toc-text">
+           CMakeLists.txt的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qtdesigner"><span class="toc-number">4.5.</span> <span class="toc-text">
+           QtDesigner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">4.6.</span> <span class="toc-text">
+           结语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E9%94%99%E8%AF%AF"><span class="toc-number">5.</span> <span class="toc-text">
+           常见问题及错误</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%9B%B8%E5%85%B3"><span class="toc-number">5.1.</span> <span class="toc-text">
+           运行相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E7%9B%B8%E5%85%B3"><span class="toc-number">5.2.</span> <span class="toc-text">
+           编译相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E7%9B%B8%E5%85%B3"><span class="toc-number">5.3.</span> <span class="toc-text">
+           发布相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="toc-number">5.4.</span> <span class="toc-text">
+           其他问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">
+           总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/avatar.png" alt="avatar"></div><p class="sidebar-ov-author__text">我即是我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Yurzi" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/11955925" target="_blank" rel="noopener" data-popover="Bilibili" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">B</span></a><a class="sidebar-ov-social-item" href="mailto:luoxuanruo@hotmail.com" target="_blank" rel="noopener" data-popover="HotMail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-at"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/rss.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Yurzi</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="//cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/piao.js" size="120" alpha="0.6" zIndex="-1"></script><script src="//cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js" color="0,0,0" opacity="0.6" count="99" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload",".header-inner"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (true) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script type="text/x-mathjax-config">var mathjaxMhchem = '';
+var mathJaxTex = {
+  equationNumbers: {
+    autoNumber: 'AMS'
+  }
+};
+
+if (false) {
+  mathjaxMhchem = 'https://cdn.jsdelivr.net/npm/mathjax-mhchem@3.3.2/mhchem.min.js';
+  MathJax.Ajax.config.path['mhchem'] = mathjaxMhchem;
+
+  mathJaxTex.extensions = [mathjaxMhchem];
+} else {
+  mathJaxTex.extensions = ['AMSmath.js','AMSsymbols.js'];
+}
+
+MathJax.Hub.Config({
+  menuSettings: {
+    zoom: 'None'
+  },
+  showMathMenu: false,
+  jax: ['input/TeX','output/CommonHTML'],
+  extensions: ['tex2jax.js'],
+  TeX: mathJaxTex,
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+  MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+    if (data.display) {
+      var next = data.script.nextSibling;
+      while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling; }
+      if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next); }
+    }
+  });
+});
+
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i = 0; i < all.length; i++) {
+    document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://blog.yurzi.net/posts/fcea146/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadUtterances() {
+  var d = document, s = d.createElement('script');
+  var container = d.getElementById('utterances-container');
+
+  if (!container) {
+    return;
+  }
+  s.src = 'https://utteranc.es/client.js';
+  s.setAttribute('repo', 'Yurzi/yurzi.github.io');
+  s.setAttribute('issue-term', 'title');
+  s.setAttribute('label', 'utterances');
+  s.setAttribute('theme', 'github-light');
+  s.setAttribute('crossorigin', 'anonymous');
+  s.setAttribute('async', '');
+  if (true) {
+    s.setAttribute('data-pjax-rm', '');
+  }
+  container.append(s);
+}
+
+if (true) {
+  loadUtterances();
+} else {
+  window.addEventListener('DOMContentLoaded', loadUtterances, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

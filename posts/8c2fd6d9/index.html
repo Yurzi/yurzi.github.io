@@ -1,0 +1,745 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2.6.2" sizes="180x180"><link rel="mask-icon" href="/%5Bobject%20Object%5D?v=2.6.2" color="#54bcff"><meta name="msapplication-TileImage" content="/%5Bobject%20Object%5D"><meta name="msapplication-TileColor" content="#000000"><meta name="google-site-verification" content="wLsuzxylkZJm7jScjZbLsimcG5pdDR_WI3lbU1LrNJg"><meta name="baidu-site-verification" content="code-bRddUSikg2"><meta name="description" content="第一题:图的深度优先搜索 Ⅰ        无向图 G 有 n 个顶点和 m 条边。求图G的深度优先搜索树(森林)以及每个顶点的发现时间和完成时间。每个连通分量从编号最小的结点开始搜索，邻接顶点选择顺序遵循边的输入顺序。 在搜索过程中，第一次遇到一个结点，称该结点被发现；一个结点的所有邻接结点都搜索完，该结点的搜索被完成。深度优先搜索维护一个时钟，时钟从0开始计数，结点被搜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-第五次解题报告">
+<meta property="og:url" content="https://blog.yurzi.net/posts/8c2fd6d9/">
+<meta property="og:site_name" content="Yurzi’s Blog">
+<meta property="og:description" content="第一题:图的深度优先搜索 Ⅰ        无向图 G 有 n 个顶点和 m 条边。求图G的深度优先搜索树(森林)以及每个顶点的发现时间和完成时间。每个连通分量从编号最小的结点开始搜索，邻接顶点选择顺序遵循边的输入顺序。 在搜索过程中，第一次遇到一个结点，称该结点被发现；一个结点的所有邻接结点都搜索完，该结点的搜索被完成。深度优先搜索维护一个时钟，时钟从0开始计数，结点被搜">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.yurzi.net/posts/8c2fd6d9/1.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/8c2fd6d9/2.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/8c2fd6d9/3.png">
+<meta property="og:image" content="https://blog.yurzi.net/posts/8c2fd6d9/4.png">
+<meta property="article:published_time" content="2021-06-13T03:13:14.000Z">
+<meta property="article:modified_time" content="2021-06-19T13:16:38.862Z">
+<meta property="article:author" content="Yurzi">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.yurzi.net/posts/8c2fd6d9/1.png"><title>数据结构-第五次解题报告 | Yurzi’s Blog</title><link ref="canonical" href="https://blog.yurzi.net/posts/8c2fd6d9/"><link rel="alternate" href="/rss.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><script src="https://www.googletagmanager.com/gtag/js?id=G-M43B6Q6Q25" async="" data-pjax=""></script><script data-pjax="">if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-M43B6Q6Q25');
+}</script><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: true,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: {"colWidth":"220px","gapX":"10px"},
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-feather-alt"></i></span><span class="header-nav-menu-item__text">文章</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/archives/"><span class="header-nav-submenu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-submenu-item__text">归档</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/categories/"><span class="header-nav-submenu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-submenu-item__text">分类</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/tags/"><span class="header-nav-submenu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-submenu-item__text">标签</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-heart"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">数据结构-第五次解题报告</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-06-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-06-19</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.5k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">27分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><h2 id="第一题图的深度优先搜索-i">
+          <a href="#第一题图的深度优先搜索-i" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#第一题图的深度优先搜索-i"></a> 第一题:图的深度优先搜索 Ⅰ</h2>
+      
+<p>无向图 G 有 n 个顶点和 m 条边。求图G的深度优先搜索树(森林)以及每个顶点的发现时间和完成时间。每个连通分量从编号最小的结点开始搜索，邻接顶点选择顺序遵循边的输入顺序。</p>
+<p>在搜索过程中，第一次遇到一个结点，称该结点被发现；一个结点的所有邻接结点都搜索完，该结点的搜索被完成。深度优先搜索维护一个时钟，时钟从0开始计数，结点被搜索发现或完成时，时钟计数增1，然后为当前结点盖上时间戳。一个结点被搜索发现和完成的时间戳分别称为该结点的发现时间和完成时间</p>
+
+        <h3 id="输入格式-img-alignright-src数据结构-第五次解题报告1png">
+          <a href="#输入格式-img-alignright-src数据结构-第五次解题报告1png" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入格式-img-alignright-src数据结构-第五次解题报告1png"></a> 输入格式  <img align="right" src="/posts/8c2fd6d9/1.png"></h3>
+      
+<p>第1行，2个整数n和m，用空格分隔，分别表示顶点数和边数， 1≤n≤50000， 1≤m≤100000.</p>
+<p>第2到m+1行，每行两个整数u和v，用空格分隔，表示顶点u到顶点v有一条边，u和v是顶点编号，1≤u,v≤n.</p>
+
+        <h3 id="输出格式">
+          <a href="#输出格式" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出格式"></a> 输出格式</h3>
+      
+<p>第1到n行，每行两个整数di和fi，用空格分隔，表示第i个顶点的发现时间和完成时间1≤i≤n 。</p>
+<p>第n+1行，1个整数 k ，表示图的深度优先搜索树(森林)的边数。</p>
+<p>第n+2到n+k+1行，每行两个整数u和v,表示深度优先搜索树(森林)的一条边&lt;u,v&gt;，边的输出顺序按 v 结点编号从小到大。</p>
+
+        <h3 id="输入样例">
+          <a href="#输入样例" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入样例"></a> 输入样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6 5</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">4 5</span><br><span class="line">5 6</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="输出样例">
+          <a href="#输出样例" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出样例"></a> 输出样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 6</span><br><span class="line">3 4</span><br><span class="line">2 5</span><br><span class="line">7 12</span><br><span class="line">8 11</span><br><span class="line">9 10</span><br><span class="line">4</span><br><span class="line">3 2</span><br><span class="line">1 3</span><br><span class="line">4 5</span><br><span class="line">5 6</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+<span id="more"></span>
+
+        <h3 id="题目解析">
+          <a href="#题目解析" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#题目解析"></a> 题目解析</h3>
+      
+<p>总的来说，就如题目标题所说的深度优先搜索(DFS)，所以代码主题上，就是DFS，只不过需要一些改动，在发现节点和节点下的所有节点都访问完的这两个个时间点做一下调整 。</p>
+<p>为此我们需要维护一个全局时间。</p>
+
+        <h4 id="方法一-朴素dfs">
+          <a href="#方法一-朴素dfs" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法一-朴素dfs"></a> 方法一 ：朴素DFS</h4>
+      
+<p><s><em>(只有这一个方法，别整什么花里胡哨的)</em></s></p>
+
+        <h5 id="代码实现">
+          <a href="#代码实现" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现"></a> 代码实现</h5>
+      
+<figure class="highlight c++"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; yurzi;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>{</span></span><br><span class="line">    <span class="keyword">int</span> info;</span><br><span class="line">    Node* next;</span><br><span class="line">    <span class="built_in">Node</span>(){</span><br><span class="line">        info=<span class="number">0</span>;</span><br><span class="line">        next=<span class="literal">nullptr</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> v){</span><br><span class="line">        info=v;</span><br><span class="line">        next=<span class="literal">nullptr</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">Node* list[<span class="number">50001</span>]={<span class="literal">nullptr</span>};    <span class="comment">//邻接表头</span></span><br><span class="line">Node* ptrList[<span class="number">50001</span>]={<span class="literal">nullptr</span>};     <span class="comment">//邻接表尾指针</span></span><br><span class="line"><span class="keyword">int</span> visited[<span class="number">50001</span>]={<span class="literal">false</span>}; <span class="comment">//标记是否访问过</span></span><br><span class="line"><span class="keyword">int</span> mytime=<span class="number">0</span>; <span class="comment">//计时器</span></span><br><span class="line"><span class="keyword">int</span> di[<span class="number">50001</span>]={<span class="number">0</span>};     <span class="comment">//记录发现时间</span></span><br><span class="line"><span class="keyword">int</span> fi[<span class="number">50001</span>]={<span class="number">0</span>};      <span class="comment">//记录结束时间</span></span><br><span class="line">priority_queue&lt;yurzi,vector&lt;yurzi&gt;,greater&lt;yurzi&gt;&gt; edge;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> ftime)</span></span>{</span><br><span class="line">    visited[x]=<span class="number">1</span>;</span><br><span class="line">    di[x]=++ftime;</span><br><span class="line">    ++mytime;</span><br><span class="line">    <span class="comment">//标记邻接节点发现时间</span></span><br><span class="line">    <span class="keyword">for</span> (Node *p=list[x];p!=<span class="literal">nullptr</span>;p=p-&gt;next)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(visited[p-&gt;info]!=<span class="number">1</span>){</span><br><span class="line">            di[p-&gt;info]=mytime;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//向下搜素</span></span><br><span class="line">    <span class="keyword">for</span> (Node* p =list[x];p!=<span class="literal">nullptr</span>;p=p-&gt;next){</span><br><span class="line">        <span class="keyword">if</span>(visited[p-&gt;info]!=<span class="number">1</span>){</span><br><span class="line">            edge.<span class="built_in">push</span>(<span class="built_in">yurzi</span>(p-&gt;info,x));</span><br><span class="line">            <span class="built_in">DFS</span>(p-&gt;info,mytime);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//该节点搜完毕;    </span></span><br><span class="line">    fi[x]=++mytime;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="comment">//数据输入</span></span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>,m=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> u=<span class="number">0</span>,v=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;u,&amp;v);</span><br><span class="line">        <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">        Node *t=ptrList[u];</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="literal">nullptr</span>){</span><br><span class="line">            list[u]=<span class="keyword">new</span> <span class="built_in">Node</span>(v);</span><br><span class="line">            ptrList[u]=list[u];</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            ptrList[u]-&gt;next=<span class="keyword">new</span> <span class="built_in">Node</span>(v);</span><br><span class="line">            ptrList[u]=ptrList[u]-&gt;next;</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        t=ptrList[v];</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="literal">nullptr</span>){</span><br><span class="line">            list[v]=<span class="keyword">new</span> <span class="built_in">Node</span>(u);</span><br><span class="line">            ptrList[v]=list[v];</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            ptrList[v]-&gt;next=<span class="keyword">new</span> <span class="built_in">Node</span>(u);</span><br><span class="line">            ptrList[v]=ptrList[v]-&gt;next;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历连通分量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        <span class="keyword">if</span>(visited[i]!=<span class="number">1</span>){</span><br><span class="line">            <span class="built_in">DFS</span>(i,mytime);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;=n; ++i)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d %d%c"</span>,di[i],fi[i],<span class="string">'\n'</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,edge.<span class="built_in">size</span>());</span><br><span class="line">    <span class="keyword">while</span> (!edge.<span class="built_in">empty</span>())</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,edge.<span class="built_in">top</span>().second,edge.<span class="built_in">top</span>().first);</span><br><span class="line">        edge.<span class="built_in">pop</span>();</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h5 id="分析">
+          <a href="#分析" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析"></a> 分析</h5>
+      
+<p>这道题最容易搞混的地方在于发现节点后时间加一再将这个时间戳标记到节点上。顺序问题比较难，要理清思路</p>
+
+        <h2 id="第二题圆">
+          <a href="#第二题圆" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#第二题圆"></a> 第二题:圆</h2>
+      
+<p>二维平面上有n 个圆。请统计：这些圆形成的不同的块的数目。</p>
+<p>圆形成的块定义如下： （1）一个圆是一个块； （2）若两个块有公共部分（含相切），则这两个块形成一个新的块，否则还是两个不同的块。</p>
+
+        <h3 id="输入格式-img-alignright-src数据结构-第五次解题报告2png">
+          <a href="#输入格式-img-alignright-src数据结构-第五次解题报告2png" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入格式-img-alignright-src数据结构-第五次解题报告2png"></a> 输入格式  <img align="right" src="/posts/8c2fd6d9/2.png"></h3>
+      
+<p>第1行包括一个整数n，表示圆的数目，n&lt;=8000。</p>
+<p>第2到n+1行，每行3 个用空格隔开的数x，y，r。（x，y）是圆心坐标，r 是半径。所有的坐标及半径都是不大于30000 的非负整数。</p>
+
+        <h3 id="输出格式-2">
+          <a href="#输出格式-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出格式-2"></a> 输出格式</h3>
+      
+<p>1个整数，表示形成的块的数目。</p>
+
+        <h3 id="输入样例-2">
+          <a href="#输入样例-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入样例-2"></a> 输入样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">0 0 1</span><br><span class="line">1 0 2</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="输出样例-2">
+          <a href="#输出样例-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出样例-2"></a> 输出样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="题目解析-2">
+          <a href="#题目解析-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#题目解析-2"></a> 题目解析</h3>
+      
+<p>这道题乍一看，问的挺玄乎，但是我们简化一下，发现就是问那些圆相接，然后圆相接，我们可以抽象一下，就是圆点以半径范围内与另一个圆点的范围相接，那就是点的相连与否</p>
+<p>这样自然的，就导出了图的连通分量的问题，所以这道题是有多种解法的。</p>
+
+        <h4 id="方法一dfsbfs遍历多个连通分支">
+          <a href="#方法一dfsbfs遍历多个连通分支" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法一dfsbfs遍历多个连通分支"></a> 方法一:DFS/BFS遍历多个连通分支</h4>
+      
+<p>我们可以用DFS/BFS来遍历 一个连通分量然后计数，得出总共的连通分支数，即所求块数</p>
+
+        <h5 id="代码实现-2">
+          <a href="#代码实现-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现-2"></a> 代码实现</h5>
+      
+<figure class="highlight c++"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Circle</span>{</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    <span class="keyword">int</span> r;</span><br><span class="line">    <span class="built_in">Circle</span>(){</span><br><span class="line">        x=<span class="number">0</span>;</span><br><span class="line">        y=<span class="number">0</span>;</span><br><span class="line">        r=<span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">Circle</span>(<span class="keyword">int</span> _x,<span class="keyword">int</span> _y,<span class="keyword">int</span> _r):<span class="built_in">x</span>(_x),<span class="built_in">y</span>(_y),<span class="built_in">r</span>(_r){}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> _x,<span class="keyword">int</span> _y,<span class="keyword">int</span> _r)</span></span>{</span><br><span class="line">        x=_x;</span><br><span class="line">        y=_y;</span><br><span class="line">        r=_r;</span><br><span class="line">    } </span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    Node* next;</span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> _v):<span class="built_in">v</span>(_v),<span class="built_in">next</span>(<span class="literal">nullptr</span>){}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Node* list[<span class="number">8001</span>]={<span class="literal">nullptr</span>}; <span class="comment">//邻接表</span></span><br><span class="line">Circle store[<span class="number">8001</span>];</span><br><span class="line"><span class="keyword">int</span> visited[<span class="number">8001</span>]={<span class="number">0</span>};</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用深度优先搜索遍历一个连通分支</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    visited[x]=<span class="number">1</span>;</span><br><span class="line">    Node *t=list[x];</span><br><span class="line">    <span class="keyword">while</span> (t!=<span class="literal">nullptr</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(visited[t-&gt;v]==<span class="number">0</span>)<span class="built_in">DFS</span>(t-&gt;v);</span><br><span class="line">        t=t-&gt;next;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="comment">//广度优先搜索</span></span><br><span class="line">queue&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    temp.<span class="built_in">push</span>(x);</span><br><span class="line">    visited[x]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!temp.<span class="built_in">empty</span>())</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> v=temp.<span class="built_in">front</span>();</span><br><span class="line">        temp.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span> (Node*p = list[v];p!=<span class="literal">nullptr</span>;p=p-&gt;next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(visited[p-&gt;v]==<span class="number">0</span>){</span><br><span class="line">                temp.<span class="built_in">push</span>(p-&gt;v);</span><br><span class="line">                visited[p-&gt;v]=<span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,y=<span class="number">0</span>,r=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;=n ; ++i)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;x,&amp;y,&amp;r);</span><br><span class="line">        <span class="built_in">getchar</span>();</span><br><span class="line">        store[i](x,y,r);</span><br><span class="line">        <span class="comment">//寻找连通项</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;++j){</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> dis=(<span class="keyword">long</span> <span class="keyword">long</span>)(store[i].x-store[j].x)*(store[i].x-store[j].x)+(<span class="keyword">long</span> <span class="keyword">long</span>)(store[i].y-store[j].y)*(store[i].y-store[j].y);</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> tr=(<span class="keyword">long</span> <span class="keyword">long</span>)(store[i].r+store[j].r)*(store[i].r+store[j].r);</span><br><span class="line">            <span class="keyword">if</span>(dis&lt;=tr){</span><br><span class="line">                Node* t=list[i];</span><br><span class="line">                list[i]=<span class="keyword">new</span> <span class="built_in">Node</span>(j);</span><br><span class="line">                <span class="keyword">if</span>(t!=<span class="literal">nullptr</span>){</span><br><span class="line">                    list[i]-&gt;next=t;</span><br><span class="line">                }</span><br><span class="line">                t=list[j];</span><br><span class="line">                list[j]=<span class="keyword">new</span> <span class="built_in">Node</span>(i);</span><br><span class="line">                <span class="keyword">if</span>(t!=<span class="literal">nullptr</span>){</span><br><span class="line">                    list[j]-&gt;next=t;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        <span class="keyword">if</span>(visited[i]==<span class="number">0</span>){</span><br><span class="line">            <span class="built_in">BFS</span>(i);</span><br><span class="line">            ++count;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,count);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h5 id="分析-2">
+          <a href="#分析-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析-2"></a> 分析</h5>
+      
+<p>直接遍历全图，时间复杂度为O(n),但需要建图，空间复杂度为O(n+e)。</p>
+
+        <h4 id="方法二并查集">
+          <a href="#方法二并查集" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法二并查集"></a> 方法二:并查集</h4>
+      
+<p>使用并查集，若2个圆相即则合并，最终统计并查集中有多少集合，即为答案</p>
+
+        <h5 id="代码实现-3">
+          <a href="#代码实现-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现-3"></a> <s>代码实现</s></h5>
+      
+<p>没写</p>
+
+        <h5 id="分析-3">
+          <a href="#分析-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析-3"></a> 分析</h5>
+      
+<p>时间复杂度是O(n<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_2n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93858em;vertical-align:-0.24414em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span>)的，并查集使用了路径压缩是这个结果，空间复杂度的话是O(n).</p>
+
+        <h2 id="第三题供电">
+          <a href="#第三题供电" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#第三题供电"></a> 第三题:供电</h2>
+      
+<p>要给N个地区供电。每个地区或者建一个供电站，或者修一条线道连接到其它有电的地区。试确定给N个地区都供上电的最小费用。</p>
+
+        <h3 id="输入格式-img-alignright-src数据结构-第五次解题报告3png">
+          <a href="#输入格式-img-alignright-src数据结构-第五次解题报告3png" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入格式-img-alignright-src数据结构-第五次解题报告3png"></a> 输入格式 <img align="right" src="/posts/8c2fd6d9/3.png"></h3>
+      
+<p>第1行，两个个整数 N 和 M , 用空格分隔，分别表示地区数和修线路的方案数，1≤N≤10000，0≤M≤50000。</p>
+<p>第2行，包含N个用空格分隔的整数P[i]，表示在第i个地区建一个供电站的代价，1 ≤P[i]≤ 100,000，1≤i≤N 。</p>
+<p>接下来M行，每行3个整数a、b和c，用空格分隔，表示在地区a和b之间修一条线路的代价为c，1 ≤ c ≤ 100,000，1≤a,b≤N 。</p>
+
+        <h3 id="输出格式-3">
+          <a href="#输出格式-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出格式-3"></a> 输出格式</h3>
+      
+<p>一行，包含一个整数， 表示所求最小代价。</p>
+
+        <h3 id="输入样例-3">
+          <a href="#输入样例-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入样例-3"></a> 输入样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">5 4 4 3</span><br><span class="line">1 2 2</span><br><span class="line">1 3 2</span><br><span class="line">1 4 2</span><br><span class="line">2 3 3</span><br><span class="line">2 4 3</span><br><span class="line">3 4 4</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="输出样例-3">
+          <a href="#输出样例-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出样例-3"></a> 输出样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">9</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="题目解析-3">
+          <a href="#题目解析-3" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#题目解析-3"></a> 题目解析</h3>
+      
+<p>这题很有趣，表面上是问你最小生成树(MST)问题，但是它有个关键点是，自己可以修发电厂，也就是说，不一定必须修建线路实现供电，这就很生草了。</p>
+<p>但是，我们可以抽象一下，自己建发电厂，算不算是从任意其他节点建的一条虚边，代价为建发电厂的代价，所以我们还是可以用Prime和Kruskal来解.</p>
+
+        <h4 id="方法一prime">
+          <a href="#方法一prime" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法一prime"></a> 方法一:Prime</h4>
+      
+<p>使用Prime，首先我们得假设对于任意节点已经存在所有虚边为可及边了，但是，因为需求最小的结果，我们应该选择建发电站代价最小的那个节点开始，因为第一条虚边后续没办法松弛排除。</p>
+<p>这里需要注意一个问题，我们要将一开始的可及边集初始化为虚边集，也就是每个节点建站的代价，其次如果使用堆优化，要注意将没有被连接节点的可及虚边更新到堆里。</p>
+
+        <h5 id="代码实现-4">
+          <a href="#代码实现-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现-4"></a> 代码实现</h5>
+      
+<figure class="highlight c++"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>{</span></span><br><span class="line">    <span class="keyword">int</span> u;</span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    Edge* next;</span><br><span class="line">    <span class="built_in">Edge</span>(<span class="keyword">int</span> _u_,<span class="keyword">int</span> _v_,<span class="keyword">int</span> _cost_):<span class="built_in">u</span>(_u_),<span class="built_in">v</span>(_v_),<span class="built_in">cost</span>(_cost_){</span><br><span class="line">        next=<span class="literal">nullptr</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Edge &amp;b)<span class="keyword">const</span>{</span><br><span class="line">        <span class="keyword">return</span> cost&gt;b.cost;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; pcost;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; dist;</span><br><span class="line">vector&lt;Edge*&gt; list;</span><br><span class="line">vector&lt;<span class="keyword">bool</span>&gt; visited;</span><br><span class="line"><span class="keyword">int</span> n=<span class="number">0</span>,m=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> cnt=<span class="number">1</span>;    <span class="comment">//记录边数</span></span><br><span class="line"><span class="keyword">int</span> res;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="comment">//根据贪心选择建设发电站最小的代价的点</span></span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>;<span class="keyword">int</span> min=__INT32_MAX__;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        <span class="keyword">if</span>(!visited[i]){</span><br><span class="line">            <span class="keyword">if</span>(pcost[i]&lt;min){</span><br><span class="line">                min=pcost[i];</span><br><span class="line">                x=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//初始化轻边</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        dist[i]=pcost[i];</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    res+=pcost[x];</span><br><span class="line">    <span class="comment">//第一个点进入已选集合</span></span><br><span class="line">    visited[x]=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (cnt&lt;n)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">//更新轻边</span></span><br><span class="line">        <span class="keyword">for</span>(Edge *i=list[x];i!=<span class="literal">nullptr</span>;i=i-&gt;next){</span><br><span class="line">            <span class="keyword">if</span>(i-&gt;cost&lt;dist[i-&gt;v]){</span><br><span class="line">                dist[i-&gt;v]=i-&gt;cost;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        min=__INT32_MAX__;</span><br><span class="line">        <span class="keyword">int</span> t=<span class="number">0</span>;    <span class="comment">//标记下一个节点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">            <span class="keyword">if</span>(visited[i])<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(min&gt;dist[i]){</span><br><span class="line">                min=dist[i];</span><br><span class="line">                t=i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        res+=min;</span><br><span class="line">        ++cnt;</span><br><span class="line">        visited[t]=<span class="literal">true</span>;</span><br><span class="line">        x=t;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="comment">//输入建发电站的花费</span></span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    pcost.<span class="built_in">reserve</span>(n+<span class="number">1</span>);list.<span class="built_in">reserve</span>(n+<span class="number">1</span>);visited.<span class="built_in">reserve</span>(n+<span class="number">1</span>);dist.<span class="built_in">reserve</span>(n+<span class="number">1</span>);</span><br><span class="line">    pcost.<span class="built_in">push_back</span>(<span class="number">0</span>);</span><br><span class="line">    list.<span class="built_in">push_back</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    visited.<span class="built_in">push_back</span>(<span class="literal">false</span>);</span><br><span class="line">    dist.<span class="built_in">push_back</span>(__INT32_MAX__);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);<span class="built_in">getchar</span>();</span><br><span class="line">        pcost.<span class="built_in">push_back</span>(t);</span><br><span class="line">        list.<span class="built_in">push_back</span>(<span class="literal">nullptr</span>);</span><br><span class="line">        visited.<span class="built_in">push_back</span>(<span class="literal">false</span>);</span><br><span class="line">        dist.<span class="built_in">push_back</span>(__INT32_MAX__);</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//读入图</span></span><br><span class="line">    <span class="keyword">int</span> u=<span class="number">0</span>,v=<span class="number">0</span>,cost=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i){</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;u,&amp;v,&amp;cost);</span><br><span class="line">        <span class="comment">//加入无向边</span></span><br><span class="line">        Edge *t=list[u];</span><br><span class="line">        list[u]=<span class="keyword">new</span> <span class="built_in">Edge</span>(u,v,cost);</span><br><span class="line">        <span class="keyword">if</span>(t!=<span class="literal">nullptr</span>){</span><br><span class="line">            list[u]-&gt;next=t;</span><br><span class="line">        }</span><br><span class="line">        t=list[v];</span><br><span class="line">        list[v]=<span class="keyword">new</span> <span class="built_in">Edge</span>(v,u,cost);</span><br><span class="line">        <span class="keyword">if</span>(t!=<span class="literal">nullptr</span>){</span><br><span class="line">            list[v]-&gt;next=t;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//寻找最小生成树</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">prime</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h5 id="分析-4">
+          <a href="#分析-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析-4"></a> 分析</h5>
+      
+<p>理智分析之后我们发现这个时间复杂度是O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>)的，如果使用堆优化的话，应该是能够变成O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><msub><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">n\log_2n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93858em;vertical-align:-0.24414em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span>)。</p>
+
+        <h4 id="方法二kruskal">
+          <a href="#方法二kruskal" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法二kruskal"></a> 方法二:Kruskal</h4>
+      
+<p>使用Kruskal的话，比较好，不用先考虑虚边的情况，只需要考虑在链接2点时划不划算，如果不划算就不连接(或者说是用虚边链接)即可。</p>
+
+        <h5 id="代码实现-5">
+          <a href="#代码实现-5" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现-5"></a> <s>代码实现</s></h5>
+      
+<p>没有，只能虚拟的写一下</p>
+
+        <h5 id="分析-5">
+          <a href="#分析-5" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析-5"></a> 分析</h5>
+      
+<p>虚空分析一波,时间复杂度是O(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>ln</mi><mo>⁡</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">e\ln e</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span></span></span></span>)，<em>快跑</em></p>
+
+        <h2 id="第四题发红包">
+          <a href="#第四题发红包" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#第四题发红包"></a> 第四题:发红包</h2>
+      
+<p>新年到了，公司要给员工发红包。员工们会比较获得的红包，有些员工会有钱数的要求，例如，c1的红包钱数要比c2的多。每个员工的红包钱数至少要发888元，这是一个幸运数字。</p>
+<p>公司想满足所有员工的要求，同时也要花钱最少，请你帮助计算。</p>
+
+        <h3 id="输入格式img-alignright-src数据结构-第五次解题报告4png">
+          <a href="#输入格式img-alignright-src数据结构-第五次解题报告4png" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入格式img-alignright-src数据结构-第五次解题报告4png"></a> 输入格式<img align="right" src="/posts/8c2fd6d9/4.png"></h3>
+      
+<p>第1行，两个整数n和m(n&lt;=10000,m&lt;=20000)，用空格分隔，分别代表员工数和要求数。</p>
+<p>接下来m行，每行两个整数c1和c2，用空格分隔，表示员工c1的红包钱数要比c2多，员工的编号1~n 。</p>
+
+        <h3 id="输出格式-4">
+          <a href="#输出格式-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出格式-4"></a> 输出格式</h3>
+      
+<p>一个整数，表示公司发的最少钱数。如果公司不能满足所有员工的需求，输出-1.</p>
+
+        <h3 id="输入样例-4">
+          <a href="#输入样例-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输入样例-4"></a> 输入样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2 1 </span><br><span class="line">1 2</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="输出样例-4">
+          <a href="#输出样例-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#输出样例-4"></a> 输出样例</h3>
+      
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1777</span><br><span class="line"></span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="题目解析-4">
+          <a href="#题目解析-4" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#题目解析-4"></a> 题目解析</h3>
+      
+<p>分析题目需求，我们发现存在一种前后节点的单向关系，所以可以抽象成有向图，而让我们求出发钱的总额，暗示我们要遍历全图，</p>
+<p>又有向又先后关联的我们自然想到AOV图和拓扑排序。题目中又提到存在不可能的情况，显然是有环的体现，更加表明用拓扑排序</p>
+
+        <h4 id="方法一aov拓扑排序">
+          <a href="#方法一aov拓扑排序" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#方法一aov拓扑排序"></a> 方法一:AOV拓扑排序</h4>
+      
+<p>因为给出的是谁比谁多的关系，我们应该逆过来建图</p>
+
+        <h5 id="代码实现-6">
+          <a href="#代码实现-6" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码实现-6"></a> 代码实现</h5>
+      
+<figure class="highlight c++"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    person *next;</span><br><span class="line">    <span class="built_in">person</span>(<span class="keyword">int</span> _v_):<span class="built_in">v</span>(_v_){</span><br><span class="line">        next=<span class="literal">nullptr</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> total_cost=<span class="number">0</span>;</span><br><span class="line">pair&lt;<span class="keyword">int</span>,pair&lt;<span class="keyword">int</span>,person*&gt;&gt; head[<span class="number">10001</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>,m=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//逆向建图</span></span><br><span class="line">    <span class="keyword">int</span> u=<span class="number">0</span>,v=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;++i){</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;v,&amp;u);<span class="built_in">getchar</span>();</span><br><span class="line">        person *t=head[u].second.second;</span><br><span class="line">        head[u].second.second=<span class="keyword">new</span> <span class="built_in">person</span>(v);</span><br><span class="line">        <span class="keyword">if</span>(t!=<span class="literal">nullptr</span>){</span><br><span class="line">            head[u].second.second-&gt;next=t;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//被指向节点入度加一</span></span><br><span class="line">        head[v].second.first++;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//进行拓扑排序</span></span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    queue&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i){</span><br><span class="line">        <span class="keyword">if</span>(head[i].second.first==<span class="number">0</span>){</span><br><span class="line">            temp.<span class="built_in">push</span>(i);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">while</span> (!temp.<span class="built_in">empty</span>()){</span><br><span class="line">        <span class="keyword">int</span> cur=temp.<span class="built_in">front</span>();</span><br><span class="line">        total_cost+=(head[cur].first+<span class="number">888</span>);</span><br><span class="line">        ++count;</span><br><span class="line">        temp.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span> (person* i = head[cur].second.second; i!=<span class="literal">nullptr</span>; i=i-&gt;next){</span><br><span class="line">            head[i-&gt;v].first=<span class="built_in">max</span>(head[i-&gt;v].first,head[cur].first+<span class="number">1</span>);</span><br><span class="line">            head[i-&gt;v].second.first--;</span><br><span class="line">            <span class="keyword">if</span>(head[i-&gt;v].second.first==<span class="number">0</span>){</span><br><span class="line">                temp.<span class="built_in">push</span>(i-&gt;v);</span><br><span class="line">            }</span><br><span class="line">        }        </span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,count==n?total_cost:<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h5 id="分析-6">
+          <a href="#分析-6" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#分析-6"></a> 分析</h5>
+      
+<p>简单套用拓扑排序的时间复杂度分析，我们便知道是O(n+e)的了</p>
+
+        <h2 id="总结">
+          <a href="#总结" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+      
+<p>这次的实验的关键在于对题目要求的抽象和建模，用合适的模型去适配，然后用对应的算法来解决。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://blog.yurzi.net">Yurzi</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://blog.yurzi.net/posts/8c2fd6d9/">https://blog.yurzi.net/posts/8c2fd6d9/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/b06eb357/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">数据结构-第六次解题报告</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/fcea146/"><span class="paginator-prev__text">WIN10+Qt6+Clion环境配置及部分错误处理</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="utterances-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%A2%98%E5%9B%BE%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2-i"><span class="toc-number">1.</span> <span class="toc-text">
+           第一题:图的深度优先搜索 Ⅰ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-img-alignright-src%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%BA%94%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A1png"><span class="toc-number">1.1.</span> <span class="toc-text">
+           输入格式  </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">
+           输出格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.3.</span> <span class="toc-text">
+           输入样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.4.</span> <span class="toc-text">
+           输出样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">1.5.</span> <span class="toc-text">
+           题目解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-%E6%9C%B4%E7%B4%A0dfs"><span class="toc-number">1.5.1.</span> <span class="toc-text">
+           方法一 ：朴素DFS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%A2%98%E5%9C%86"><span class="toc-number">2.</span> <span class="toc-text">
+           第二题:圆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-img-alignright-src%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%BA%94%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A2png"><span class="toc-number">2.1.</span> <span class="toc-text">
+           输入格式  </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">2.2.</span> <span class="toc-text">
+           输出格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">2.3.</span> <span class="toc-text">
+           输入样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">2.4.</span> <span class="toc-text">
+           输出样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90-2"><span class="toc-number">2.5.</span> <span class="toc-text">
+           题目解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80dfsbfs%E9%81%8D%E5%8E%86%E5%A4%9A%E4%B8%AA%E8%BF%9E%E9%80%9A%E5%88%86%E6%94%AF"><span class="toc-number">2.5.1.</span> <span class="toc-text">
+           方法一:DFS&#x2F;BFS遍历多个连通分支</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90-2"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">2.5.2.</span> <span class="toc-text">
+           方法二:并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-3"><span class="toc-number">2.5.2.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90-3"><span class="toc-number">2.5.2.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%A2%98%E4%BE%9B%E7%94%B5"><span class="toc-number">3.</span> <span class="toc-text">
+           第三题:供电</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-img-alignright-src%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%BA%94%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A3png"><span class="toc-number">3.1.</span> <span class="toc-text">
+           输入格式 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">3.2.</span> <span class="toc-text">
+           输出格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">3.3.</span> <span class="toc-text">
+           输入样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">3.4.</span> <span class="toc-text">
+           输出样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90-3"><span class="toc-number">3.5.</span> <span class="toc-text">
+           题目解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80prime"><span class="toc-number">3.5.1.</span> <span class="toc-text">
+           方法一:Prime</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-4"><span class="toc-number">3.5.1.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90-4"><span class="toc-number">3.5.1.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8Ckruskal"><span class="toc-number">3.5.2.</span> <span class="toc-text">
+           方法二:Kruskal</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-5"><span class="toc-number">3.5.2.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90-5"><span class="toc-number">3.5.2.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%A2%98%E5%8F%91%E7%BA%A2%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">
+           第四题:发红包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8Fimg-alignright-src%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%BA%94%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A4png"><span class="toc-number">4.1.</span> <span class="toc-text">
+           输入格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-4"><span class="toc-number">4.2.</span> <span class="toc-text">
+           输出格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B-4"><span class="toc-number">4.3.</span> <span class="toc-text">
+           输入样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-4"><span class="toc-number">4.4.</span> <span class="toc-text">
+           输出样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90-4"><span class="toc-number">4.5.</span> <span class="toc-text">
+           题目解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80aov%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">4.5.1.</span> <span class="toc-text">
+           方法一:AOV拓扑排序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-6"><span class="toc-number">4.5.1.1.</span> <span class="toc-text">
+           代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E6%9E%90-6"><span class="toc-number">4.5.1.2.</span> <span class="toc-text">
+           分析</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">
+           总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/avatar.png" alt="avatar"></div><p class="sidebar-ov-author__text">我即是我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Yurzi" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/11955925" target="_blank" rel="noopener" data-popover="Bilibili" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">B</span></a><a class="sidebar-ov-social-item" href="mailto:luoxuanruo@hotmail.com" target="_blank" rel="noopener" data-popover="HotMail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-at"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/rss.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Yurzi</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="//cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/piao.js" size="120" alpha="0.6" zIndex="-1"></script><script src="//cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js" color="0,0,0" opacity="0.6" count="99" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload",".header-inner"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (true) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script type="text/x-mathjax-config">var mathjaxMhchem = '';
+var mathJaxTex = {
+  equationNumbers: {
+    autoNumber: 'AMS'
+  }
+};
+
+if (false) {
+  mathjaxMhchem = 'https://cdn.jsdelivr.net/npm/mathjax-mhchem@3.3.2/mhchem.min.js';
+  MathJax.Ajax.config.path['mhchem'] = mathjaxMhchem;
+
+  mathJaxTex.extensions = [mathjaxMhchem];
+} else {
+  mathJaxTex.extensions = ['AMSmath.js','AMSsymbols.js'];
+}
+
+MathJax.Hub.Config({
+  menuSettings: {
+    zoom: 'None'
+  },
+  showMathMenu: false,
+  jax: ['input/TeX','output/CommonHTML'],
+  extensions: ['tex2jax.js'],
+  TeX: mathJaxTex,
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+  MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+    if (data.display) {
+      var next = data.script.nextSibling;
+      while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling; }
+      if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next); }
+    }
+  });
+});
+
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i = 0; i < all.length; i++) {
+    document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://blog.yurzi.net/posts/8c2fd6d9/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadUtterances() {
+  var d = document, s = d.createElement('script');
+  var container = d.getElementById('utterances-container');
+
+  if (!container) {
+    return;
+  }
+  s.src = 'https://utteranc.es/client.js';
+  s.setAttribute('repo', 'Yurzi/yurzi.github.io');
+  s.setAttribute('issue-term', 'title');
+  s.setAttribute('label', 'utterances');
+  s.setAttribute('theme', 'github-light');
+  s.setAttribute('crossorigin', 'anonymous');
+  s.setAttribute('async', '');
+  if (true) {
+    s.setAttribute('data-pjax-rm', '');
+  }
+  container.append(s);
+}
+
+if (true) {
+  loadUtterances();
+} else {
+  window.addEventListener('DOMContentLoaded', loadUtterances, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
