@@ -37,7 +37,7 @@ var CONFIG = {
   zoomImage: {"gapAside":"20px"},
   galleryWaterfall: {"colWidth":"220px","gapX":"10px"},
   lazyload: false,
-  pjax: {"avoidBanner":false},
+  pjax: {"avoidBanner":true},
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
   prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
@@ -637,7 +637,7 @@ if (Array.isArray(assistSearchList)) {
     }, false);
   });
 }</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
-  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload",".header-inner"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload",".header-inner"],"history":true,"scrollTo":false,"scrollRestoration":true,"cacheBust":true,"debug":false,"currentUrlFullReload":false,"timeout":30000});
   // 加载进度条的计时器
   var loadingTimer = null;
 
