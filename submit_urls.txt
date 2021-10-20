@@ -1,6 +1,5 @@
 https://blog.yurzi.net/posts/fcea146/
 https://blog.yurzi.net/posts/b77e3ad9/
-https://blog.yurzi.net/posts/e36732a6/
 https://blog.yurzi.net/posts/b5d31d08/
 https://blog.yurzi.net/posts/4492febb/
 https://blog.yurzi.net/posts/43cd80f5/
@@ -8,3 +7,4 @@ https://blog.yurzi.net/posts/a62b4006/
 https://blog.yurzi.net/posts/b78dffe7/
 https://blog.yurzi.net/posts/c96fa57/
 https://blog.yurzi.net/posts/7e7e02b7/
+https://blog.yurzi.net/posts/8c2fd6d9/
