@@ -1,0 +1,772 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2.6.2" sizes="180x180"><link rel="mask-icon" href="/%5Bobject%20Object%5D?v=2.6.2" color="#54bcff"><meta name="msapplication-TileImage" content="/%5Bobject%20Object%5D"><meta name="msapplication-TileColor" content="#000000"><meta name="google-site-verification" content="wLsuzxylkZJm7jScjZbLsimcG5pdDR_WI3lbU1LrNJg"><meta name="baidu-site-verification" content="code-bRddUSikg2"><meta name="description" content="在学习生活中经常遇到需要绘制各种流程图，框图，UML图的情况，一种比较方便的方法就是使用Graphviz来进行绘制，而Graphviz使用Dot语言进行解析生成，故学习dot，并作此笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dot语言学习笔记">
+<meta property="og:url" content="https://blog.yurzi.net/posts/d5d87576/">
+<meta property="og:site_name" content="Yurzi’s Blog">
+<meta property="og:description" content="在学习生活中经常遇到需要绘制各种流程图，框图，UML图的情况，一种比较方便的方法就是使用Graphviz来进行绘制，而Graphviz使用Dot语言进行解析生成，故学习dot，并作此笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-10T01:49:26.000Z">
+<meta property="article:modified_time" content="2021-11-10T03:15:01.413Z">
+<meta property="article:author" content="Yurzi">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="dot">
+<meta name="twitter:card" content="summary"><title>dot语言学习笔记 | Yurzi’s Blog</title><link ref="canonical" href="https://blog.yurzi.net/posts/d5d87576/"><link rel="alternate" href="/rss.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><script src="https://www.googletagmanager.com/gtag/js?id=G-M43B6Q6Q25" async="" data-pjax=""></script><script data-pjax="">if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-M43B6Q6Q25');
+}</script><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: true,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: {"colWidth":"220px","gapX":"10px"},
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-feather-alt"></i></span><span class="header-nav-menu-item__text">文章</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/archives/"><span class="header-nav-submenu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-submenu-item__text">归档</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/categories/"><span class="header-nav-submenu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-submenu-item__text">分类</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/tags/"><span class="header-nav-submenu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-submenu-item__text">标签</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-heart"></i></span><span class="header-nav-menu-item__text">友链</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">dot语言学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-11-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-11-10</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.4k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">10分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><p>在学习生活中经常遇到需要绘制各种流程图，框图，UML图的情况，一种比较方便的方法就是使用<strong>Graphviz</strong>来进行绘制，而Graphviz使用Dot语言进行解析生成，故学习dot，并作此笔记</p>
+<span id="more"></span>
+
+        <h2 id="dot语法总结">
+          <a href="#dot语法总结" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#dot语法总结"></a> dot语法总结</h2>
+      
+
+        <h3 id="dot的抽象语法">
+          <a href="#dot的抽象语法" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#dot的抽象语法"></a> dot的抽象语法</h3>
+      
+<div class="table-container"><table>
+<thead>
+<tr>
+<th style="text-align:center">对象</th>
+<th style="text-align:center">格式与内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">graph</td>
+<td style="text-align:center">[ strict ] (graph | digraph) [ ID ] ‘{’ stmt_list ‘}’</td>
+</tr>
+<tr>
+<td style="text-align:center">stmt_list</td>
+<td style="text-align:center">[stmt[’;’]stmt_list]</td>
+</tr>
+<tr>
+<td style="text-align:center">stmt</td>
+<td style="text-align:center">node_stmt</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">edge_stmt</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">attr_stmt</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center"><em>ID</em>’='<em>ID</em></td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">subgraph</td>
+</tr>
+<tr>
+<td style="text-align:center">attr_stmt</td>
+<td style="text-align:center">(graph | node | edge ) attr_list</td>
+</tr>
+<tr>
+<td style="text-align:center">attr_list</td>
+<td style="text-align:center">‘[’ [ a_list ] ‘]’ [ attr_list ]</td>
+</tr>
+<tr>
+<td style="text-align:center">edge_stmt</td>
+<td style="text-align:center">(node_id | subgraph) edgeRHS [ attr_list ]</td>
+</tr>
+<tr>
+<td style="text-align:center">edgeRHS</td>
+<td style="text-align:center">edgeop (node_id | subgraph) [ edgeRHS ]</td>
+</tr>
+<tr>
+<td style="text-align:center">node_stmt</td>
+<td style="text-align:center">node_id [ attr_list ]</td>
+</tr>
+<tr>
+<td style="text-align:center">node_id</td>
+<td style="text-align:center">ID [ port ]</td>
+</tr>
+<tr>
+<td style="text-align:center">port</td>
+<td style="text-align:center">‘:’ ID [ ‘:’ compass_pt ]</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">‘:’ compass_pt</td>
+</tr>
+<tr>
+<td style="text-align:center">subgraph</td>
+<td style="text-align:center">[ subgraph [ ID ] ] ‘{’ stmt_list ‘}’</td>
+</tr>
+<tr>
+<td style="text-align:center">compass_pt</td>
+<td style="text-align:center">(n | ne | e | se | s | sw | w | nw | c | _)</td>
+</tr>
+</tbody>
+</table></div>
+
+        <h3 id="关键字">
+          <a href="#关键字" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#关键字"></a> 关键字</h3>
+      
+<p>其中在有向图中使用<code>-&gt;</code>在无向图中使用<code>--</code>来表示边</p>
+<ul>
+<li>node：节点属性</li>
+<li>edge：连线属性</li>
+<li>graph：图属性，或声明一个无向图时使用</li>
+<li>digraph：有向图</li>
+<li>subgraph：声明子视图，名字要以<code>cluster</code>开头。</li>
+<li>strict：严格模式，用于防止相同的两个节点间使用重复的连线。</li>
+</ul>
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph G1 {</span><br><span class="line">    a -- b;</span><br><span class="line">    a -- d;</span><br><span class="line">    b -- c;</span><br><span class="line">    d -- c;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+<figure class="highlight plain"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">digraph G1 {</span><br><span class="line">    edge [dir=none];</span><br><span class="line">    a -&gt; b;</span><br><span class="line">    a -&gt; d;</span><br><span class="line">    b -&gt; c;</span><br><span class="line">    d -&gt; c;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="元素声明和定义及属性">
+          <a href="#元素声明和定义及属性" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#元素声明和定义及属性"></a> 元素声明和定义及属性</h3>
+      
+
+        <h4 id="图graph">
+          <a href="#图graph" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#图graph"></a> 图(graph)</h4>
+      
+
+        <h5 id="声明和定义">
+          <a href="#声明和定义" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#声明和定义"></a> 声明和定义</h5>
+      
+<p>使用(graph| digraph) graphName {}来声明和定义一个图。<br>
+使用subgraph cluster_subGrapgName {}来在图中声明子图</p>
+<figure class="highlight mipsasm"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">digraph </span>example1 {</span><br><span class="line">  label = <span class="string">"this is a graph"</span>;</span><br><span class="line">  a<span class="comment">;b;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">subgraph </span>cluster_subgraphName1 {</span><br><span class="line">    label = <span class="string">"this is a  subgraph"</span>;</span><br><span class="line">    <span class="keyword">bgcolor </span>= <span class="keyword">blue;</span></span><br><span class="line"><span class="keyword"> </span>   c<span class="comment">;d;</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h5 id="属性">
+          <a href="#属性" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#属性"></a> 属性</h5>
+      
+<ol>
+<li>bgcolor：设置图的背景颜色，可以使用rgb值，也可以用#rrggbb编码形式</li>
+<li>label：设置图的描述。label会继承到子图，如果不想子图重复label需手动设置</li>
+<li>rankdir：设置图的方向，包括：TB（top to bottom）、BT（bottom to top）、LR(left to 4. Right）、RL（right to left）</li>
+<li>rotate：设置图的旋转。如rotata = 90代表旋转90度，默认逆时针</li>
+<li>ratio：设置图的长宽比，可以是一个浮点数，也可以是：fill、compress、auto</li>
+<li>compounrd: 设置图内子图之间的边的连接，为布尔值</li>
+</ol>
+<p>** 在子图间建立边 **<br>
+需要设置图的属性<code>compound=true</code></p>
+
+        <h4 id="节点node">
+          <a href="#节点node" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#节点node"></a> 节点(node)</h4>
+      
+
+        <h5 id="声明与定义">
+          <a href="#声明与定义" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#声明与定义"></a> 声明与定义</h5>
+      
+<p>声明一个节点只需要输入节点的名字，抽象语法如下</p>
+<p><code>nodeName [attr_list]</code></p>
+<p>若节点的名字特殊可以使用双引号将其括起来，如"x,y"</p>
+
+        <h5 id="属性-2">
+          <a href="#属性-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#属性-2"></a> 属性</h5>
+      
+<p>可以使用<code>node</code>关键字设定全局节点属性</p>
+<ol>
+<li>shape：设置结点形状。包括：Mrecord（圆角矩形）、record（矩形）、circle（圆形）、box（矩形，和record略有区别，下面会讲到）、egg（蛋形）、doublecircle（双圆形）、plaintext（纯文本）、 ellipse（椭圆，默认）。更多详见<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://graphviz.org/doc/info/shapes.html">官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>label：设置结点的显示内容，内容用双引号包含，可以使用转义字符。当结点内容!=结点名时使用</li>
+<li>style：设置结点的样式。包括：filled(填充)、dotted（点状边框）、solid（普通边框）、dashed（虚线边框）、bold（边框加粗）、invis（隐形）。</li>
+<li>color：设置边框颜色。可以使用单词形式或者#rrggbb形式。</li>
+<li>fillcolor：设置填充颜色，仅style = filled时有效。</li>
+<li>width：设置结点宽度。</li>
+<li>height：设置结点高度。</li>
+<li>perpheries：设置结点边框个数。</li>
+<li>fontcolor：设置结点内容颜色。可以使用单词形式或者#rrggbb形式</li>
+</ol>
+<p><strong>Label</strong></p>
+<p>在label上record和box有所区别。原因就是：设置为record和Mrecord的结点的label属性可以很方便地生成单列的表格和UML图等。（类似于XAML里面的stack）</p>
+<p>用一对双引号+一对花括号包含起来的就是表格内容，不同的格子之间用符号 | 隔开，尖括号里的内容表示一个锚点</p>
+<p>例如：</p>
+<figure class="highlight maxima"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">example</span> [shape = record, <span class="built_in">label</span> = <span class="string">"{&lt;head&gt;cell1 | cell2 | cell3}"</span>];</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="边">
+          <a href="#边" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#边"></a> 边</h3>
+      
+
+        <h5 id="声明和定义-2">
+          <a href="#声明和定义-2" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#声明和定义-2"></a> 声明和定义</h5>
+      
+<p>边的声明比较简单，只需用<code>-&gt;</code>(digraph)或者<code>--</code>(graph)将2个节点置于两侧即可，对于未声明的节点会自动声明。抽象化声明：<br>
+<code>nodeName1 -&gt;|-- nodeName2 [attr_list]</code><br>
+如：<code>a-&gt;b</code></p>
+
+        <h5 id="边的属性">
+          <a href="#边的属性" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#边的属性"></a> 边的属性</h5>
+      
+<p>1.style：设置边的形状。包括：solid（实线）、dashed（虚线）、dotted（点线）、bold（加粗）、invis（隐形）。<br>
+2.label：设置边标签。内容用双引号包含，可以使用转义字符。<br>
+3.color：设置边颜色。可以使用单词形式或者#rrggbb形式。<br>
+4.arrowhead：设置结点箭头样式。包括：none、empty、odiamond等详见<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://graphviz.org/docs/attr-types/arrowType/">arrowhead样式表</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
+
+        <h3 id="注释与表格锚点">
+          <a href="#注释与表格锚点" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#注释与表格锚点"></a> 注释与表格锚点</h3>
+      
+<p>使用<code>//</code>或者<code>/**/</code>来添加注释</p>
+<p>对于表格锚点，在表格中尖括号里的为表格锚点名称示例：</p>
+<figure class="highlight css"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">digraph example2 {</span><br><span class="line">  node <span class="selector-attr">[shape = record]</span>;</span><br><span class="line">  table1 <span class="selector-attr">[label = <span class="string">"{&lt;head&gt;cell1 | cell2 | cell3}"</span>]</span>;</span><br><span class="line">  table2 <span class="selector-attr">[label = <span class="string">"{&lt;head&gt;cell1 | cell2}"</span>]</span>;</span><br><span class="line"></span><br><span class="line">  table1: head -&gt; table2: head</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h2 id="dot应用">
+          <a href="#dot应用" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#dot应用"></a> dot应用</h2>
+      
+
+        <h3 id="支持中文">
+          <a href="#支持中文" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#支持中文"></a> 支持中文</h3>
+      
+<p>Graphviz默认是不支持中文的，输入的中文在生成的图中显示为一个空方块。如果想要让其支持中文，可以尝试以下方法：</p>
+<ul>
+<li>在命令行制定-Nfontname = xxx.ttf，在gv文件中输入utf-8编码的汉字</li>
+<li>给graph、node、edge设置fontname = xxx.ttf然后设置label</li>
+</ul>
+
+        <h3 id="支持html">
+          <a href="#支持html" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#支持html"></a> 支持html</h3>
+      
+<p><strong>labal</strong>属性支持html语言。</p>
+
+        <h3 id="绘制内容丰富的节点">
+          <a href="#绘制内容丰富的节点" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#绘制内容丰富的节点"></a> 绘制内容丰富的节点</h3>
+      
+<p>主要使用label标签的特性</p>
+<figure class="highlight routeros"><div class="table-container"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">digraph structs {acyclic</span><br><span class="line">    node [<span class="attribute">shape</span>=record];</span><br><span class="line">       struct1 [<span class="attribute">shape</span>=record, <span class="attribute">label</span>=<span class="string">"&lt;f0&gt; left|&lt;f1&gt; mid\ndle|&lt;f2&gt; right"</span>];</span><br><span class="line">       struct2 [<span class="attribute">shape</span>=record, <span class="attribute">label</span>=<span class="string">"&lt;f0&gt; one|&lt;f1&gt; two"</span>];</span><br><span class="line">       struct3 [<span class="attribute">shape</span>=record, <span class="attribute">label</span>=<span class="string">"hello\nworld |{ b |{c|&lt;here&gt; d|e}| f}| g | h"</span>];</span><br><span class="line">       struct1 -&gt; struct2;</span><br><span class="line">       struct1 -&gt; struct3;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></div></figure>
+
+        <h3 id="graphviz的使用">
+          <a href="#graphviz的使用" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#graphviz的使用"></a> Graphviz的使用</h3>
+      
+<p>命令行的抽象语法<br>
+<code>dot -[Tps|Tsvg|Tfig|Tpng|Tgif] -Nfontname = xxx.ttf -O outName</code></p>
+<p>可能的内容如下：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-Tps</td>
+<td style="text-align:center">输出PostScript</td>
+</tr>
+<tr>
+<td style="text-align:center">-Tsvg</td>
+<td style="text-align:center">输出SVG</td>
+</tr>
+<tr>
+<td style="text-align:center">-Tfig</td>
+<td style="text-align:center">输出XFIG</td>
+</tr>
+<tr>
+<td style="text-align:center">-Tpng</td>
+<td style="text-align:center">输出PNG</td>
+</tr>
+<tr>
+<td style="text-align:center">-Tgif</td>
+<td style="text-align:center">输出GIF</td>
+</tr>
+<tr>
+<td style="text-align:center">-G键=值</td>
+<td style="text-align:center">设置默认图属性</td>
+</tr>
+<tr>
+<td style="text-align:center">-N键=值</td>
+<td style="text-align:center">设置默认结点属性</td>
+</tr>
+<tr>
+<td style="text-align:center">-E键=值</td>
+<td style="text-align:center">设置默认边属性</td>
+</tr>
+<tr>
+<td style="text-align:center">-O</td>
+<td style="text-align:center">自动生成输出文件名</td>
+</tr>
+<tr>
+<td style="text-align:center">-sf尺度</td>
+<td style="text-align:center">缩放输入默认72</td>
+</tr>
+<tr>
+<td style="text-align:center">-y</td>
+<td style="text-align:center">反转输入中的y坐标</td>
+</tr>
+</tbody>
+</table></div>
+
+        <h2 id="参考文献">
+          <a href="#参考文献" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h2>
+      
+<ol>
+<li>Graphviz官方文档：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://graphviz.org/documentation/">https://graphviz.org/documentation/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>Code@浮生记. dot语法总结：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://onlookerliu.github.io/2017/12/28/dot%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/#2-%E5%9B%BE%E7%9A%84%E5%A3%B0%E6%98%8E">https://onlookerliu.github.io/2017/12/28/dot语法总结/#2-图的声明</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>li-peng. dot语法总结. cnblog：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.cnblogs.com/li-peng/p/14565148.html">https://www.cnblogs.com/li-peng/p/14565148.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>码农家园的一篇文章：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.codenong.com/cs105791723/">https://www.codenong.com/cs105791723/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ol>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://blog.yurzi.net">Yurzi</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://blog.yurzi.net/posts/d5d87576/">https://blog.yurzi.net/posts/d5d87576/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/">笔记</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://blog.yurzi.net/tags/dot/">dot</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/posts/b5d31d08/"><span class="paginator-prev__text">考试周破防</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="utterances-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dot%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">
+           dot语法总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dot%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">
+           dot的抽象语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.2.</span> <span class="toc-text">
+           关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">
+           元素声明和定义及属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BEgraph"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+           图(graph)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">
+           声明和定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">
+           属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8A%82%E7%82%B9node"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+           节点(node)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E4%B8%8E%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">
+           声明与定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7-2"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">
+           属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9"><span class="toc-number">1.4.</span> <span class="toc-text">
+           边</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89-2"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">
+           声明和定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%B9%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">
+           边的属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E4%B8%8E%E8%A1%A8%E6%A0%BC%E9%94%9A%E7%82%B9"><span class="toc-number">1.5.</span> <span class="toc-text">
+           注释与表格锚点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dot%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">
+           dot应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87"><span class="toc-number">2.1.</span> <span class="toc-text">
+           支持中文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81html"><span class="toc-number">2.2.</span> <span class="toc-text">
+           支持html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%86%85%E5%AE%B9%E4%B8%B0%E5%AF%8C%E7%9A%84%E8%8A%82%E7%82%B9"><span class="toc-number">2.3.</span> <span class="toc-text">
+           绘制内容丰富的节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#graphviz%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.4.</span> <span class="toc-text">
+           Graphviz的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.</span> <span class="toc-text">
+           参考文献</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/avatar.png" alt="avatar"></div><p class="sidebar-ov-author__text">我即是我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Yurzi" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/11955925" target="_blank" rel="noopener" data-popover="Bilibili" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">B</span></a><a class="sidebar-ov-social-item" href="mailto:luoxuanruo@hotmail.com" target="_blank" rel="noopener" data-popover="HotMail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-at"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/rss.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Yurzi</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="//cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/piao.js" size="120" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload",".header-inner"],"history":true,"scrollTo":false,"scrollRestoration":true,"cacheBust":true,"debug":false,"currentUrlFullReload":false,"timeout":30000});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (true) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script type="text/x-mathjax-config">var mathjaxMhchem = '';
+var mathJaxTex = {
+  equationNumbers: {
+    autoNumber: 'AMS'
+  }
+};
+
+if (false) {
+  mathjaxMhchem = 'https://cdn.jsdelivr.net/npm/mathjax-mhchem@3.3.2/mhchem.min.js';
+  MathJax.Ajax.config.path['mhchem'] = mathjaxMhchem;
+
+  mathJaxTex.extensions = [mathjaxMhchem];
+} else {
+  mathJaxTex.extensions = ['AMSmath.js','AMSsymbols.js'];
+}
+
+MathJax.Hub.Config({
+  menuSettings: {
+    zoom: 'None'
+  },
+  showMathMenu: false,
+  jax: ['input/TeX','output/CommonHTML'],
+  extensions: ['tex2jax.js'],
+  TeX: mathJaxTex,
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+  MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+    if (data.display) {
+      var next = data.script.nextSibling;
+      while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling; }
+      if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next); }
+    }
+  });
+});
+
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i = 0; i < all.length; i++) {
+    document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://blog.yurzi.net/posts/d5d87576/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script></div><script data-pjax="">function loadUtterances() {
+  var d = document, s = d.createElement('script');
+  var container = d.getElementById('utterances-container');
+
+  if (!container) {
+    return;
+  }
+  s.src = 'https://utteranc.es/client.js';
+  s.setAttribute('repo', 'Yurzi/yurzi.github.io');
+  s.setAttribute('issue-term', 'title');
+  s.setAttribute('label', 'utterances');
+  s.setAttribute('theme', 'github-light');
+  s.setAttribute('crossorigin', 'anonymous');
+  s.setAttribute('async', '');
+  if (true) {
+    s.setAttribute('data-pjax-rm', '');
+  }
+  container.append(s);
+}
+
+if (true) {
+  loadUtterances();
+} else {
+  window.addEventListener('DOMContentLoaded', loadUtterances, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
