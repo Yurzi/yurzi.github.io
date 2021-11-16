@@ -6,7 +6,7 @@
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2021-11-10T03:15:01.413Z</updated>
+  <updated>2021-11-15T16:35:09.938Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.yurzi.net/posts/d5d87576/"/>
     <id>https://blog.yurzi.net/posts/d5d87576/</id>
     <published>2021-11-10T01:49:26.000Z</published>
-    <updated>2021-11-10T03:15:01.413Z</updated>
+    <updated>2021-11-15T16:35:09.938Z</updated>
     
     
     <summary type="html">&lt;p&gt;在学习生活中经常遇到需要绘制各种流程图，框图，UML图的情况，一种比较方便的方法就是使用&lt;strong&gt;Graphviz&lt;/strong&gt;来进行绘制，而Graphviz使用Dot语言进行解析生成，故学习dot，并作此笔记&lt;/p&gt;</summary>
@@ -36,6 +36,177 @@
     <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
     
     <category term="dot" scheme="https://blog.yurzi.net/tags/dot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4-第一个程序</title>
+    <link href="https://blog.yurzi.net/posts/93121487/"/>
+    <id>https://blog.yurzi.net/posts/93121487/</id>
+    <published>2021-08-21T06:14:20.998Z</published>
+    <updated>2021-11-16T14:22:33.380Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;一个源程序从写出到执行的过程&quot;&gt;
+          &lt;a href=&quot;#一个源程序从写出到执行的过程&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#一个源程序从写出到执行的过程&quot;&gt;&lt;/a&gt; 一个源程序从写出到执行的过程&lt;/h2&gt;
+      
+&lt;p&gt;&lt;strong&gt;第一步&lt;/strong&gt;：编写汇编程序&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步&lt;/strong&gt;：对源程序进行编译连接&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;可执行文件包含2个部分&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;程序和数据&lt;/li&gt;
+&lt;li&gt;相关的描述信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第三步&lt;/strong&gt;：执行可执行文件中的程序&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/"/>
+    
+    <category term="4-第一个程序" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/4-%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="汇编" scheme="https://blog.yurzi.net/tags/%E6%B1%87%E7%BC%96/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/tags/assembly-x86-64/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3-寄存器(内存访问)</title>
+    <link href="https://blog.yurzi.net/posts/2071e8f1/"/>
+    <id>https://blog.yurzi.net/posts/2071e8f1/</id>
+    <published>2021-08-04T09:05:57.325Z</published>
+    <updated>2021-11-16T14:22:33.381Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;内存中字的存储&quot;&gt;
+          &lt;a href=&quot;#内存中字的存储&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#内存中字的存储&quot;&gt;&lt;/a&gt; 内存中字的存储&lt;/h2&gt;
+      
+&lt;p&gt;内存中一个字需要2个地址连续的内存单元来存放，字的低位字节存放在低地址单元中，高位字节存放在高地址单元中&lt;/p&gt;
+&lt;p&gt;任何2个地址连续的内存单元，N单元和N+1号单元，可以将它们看成2个内存单元，也可以看成一个地址为N的字单元中的高位字节单元和低位字节单元。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在读写中，默认指定的单元地址为低位地址&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/"/>
+    
+    <category term="3-寄存器(内存访问)" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/3-%E5%AF%84%E5%AD%98%E5%99%A8-%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="汇编" scheme="https://blog.yurzi.net/tags/%E6%B1%87%E7%BC%96/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/tags/assembly-x86-64/"/>
+    
+    <category term="寄存器" scheme="https://blog.yurzi.net/tags/%E5%AF%84%E5%AD%98%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2-Debug的使用</title>
+    <link href="https://blog.yurzi.net/posts/768629/"/>
+    <id>https://blog.yurzi.net/posts/768629/</id>
+    <published>2021-08-04T06:44:07.546Z</published>
+    <updated>2021-11-16T14:22:33.379Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;win10环境下的汇编环境的配置&quot;&gt;
+          &lt;a href=&quot;#win10环境下的汇编环境的配置&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/"/>
+    
+    <category term="2-Debug的使用" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/2-Debug%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="汇编" scheme="https://blog.yurzi.net/tags/%E6%B1%87%E7%BC%96/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/tags/assembly-x86-64/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1-寄存器</title>
+    <link href="https://blog.yurzi.net/posts/263842aa/"/>
+    <id>https://blog.yurzi.net/posts/263842aa/</id>
+    <published>2021-08-03T05:37:15.251Z</published>
+    <updated>2021-11-16T14:22:33.377Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;通用寄存器&quot;&gt;
+          &lt;a href=&quot;#通用寄存器&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#通用寄存器&quot;&gt;&lt;/a&gt; 通用寄存器&lt;/h2&gt;
+      
+&lt;p&gt;每个cpu都有自己的寄存器，如8060CPU有14个寄存器：AX BX CX DX SI DI SP BP IP CS SS DS ES PSW。&lt;/p&gt;
+&lt;p&gt;AX BX CX DX用来存放一般数据被称为通用寄存器&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/"/>
+    
+    <category term="1-寄存器" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/1-%E5%AF%84%E5%AD%98%E5%99%A8/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="汇编" scheme="https://blog.yurzi.net/tags/%E6%B1%87%E7%BC%96/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/tags/assembly-x86-64/"/>
+    
+    <category term="寄存器" scheme="https://blog.yurzi.net/tags/%E5%AF%84%E5%AD%98%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-汇编概论</title>
+    <link href="https://blog.yurzi.net/posts/24b6c9f3/"/>
+    <id>https://blog.yurzi.net/posts/24b6c9f3/</id>
+    <published>2021-08-01T07:23:33.159Z</published>
+    <updated>2021-11-16T14:22:33.372Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;什么是汇编语言&quot;&gt;
+          &lt;a href=&quot;#什么是汇编语言&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#什么是汇编语言&quot;&gt;&lt;/a&gt; 什么是汇编语言&lt;/h2&gt;
+      
+&lt;p&gt;汇编语言是最古老的编程语言，在所有的语言中，它与原生机器语言最为接近。它能直接访问计算机硬件，要求用户了解计算机架构和操作系统。&lt;/p&gt;
+&lt;p&gt;汇编语言直接在硬件上运行，效率高&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/"/>
+    
+    <category term="0-汇编概论" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/assembly-x86-64/0-%E6%B1%87%E7%BC%96%E6%A6%82%E8%AE%BA/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="汇编" scheme="https://blog.yurzi.net/tags/%E6%B1%87%E7%BC%96/"/>
+    
+    <category term="assembly x86_64" scheme="https://blog.yurzi.net/tags/assembly-x86-64/"/>
+    
+    <category term="概论" scheme="https://blog.yurzi.net/tags/%E6%A6%82%E8%AE%BA/"/>
     
   </entry>
   
@@ -66,7 +237,7 @@
     <link href="https://blog.yurzi.net/posts/43cd80f5/"/>
     <id>https://blog.yurzi.net/posts/43cd80f5/</id>
     <published>2021-06-19T13:44:10.000Z</published>
-    <updated>2021-06-19T14:16:33.050Z</updated>
+    <updated>2021-11-16T14:24:18.318Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;第一题序列调度&quot;&gt;
@@ -101,7 +272,7 @@
     
     <category term="报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/"/>
     
-    <category term="第六次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E5%85%AD%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
+    <category term="第七次解题报告" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8A%A5%E5%91%8A/%E7%AC%AC%E4%B8%83%E6%AC%A1%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
     
     
     <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
