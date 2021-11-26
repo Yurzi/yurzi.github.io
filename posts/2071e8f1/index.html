@@ -2,7 +2,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="3-寄存器(内存访问)">
 <meta property="og:url" content="https://blog.yurzi.net/posts/2071e8f1/">
-<meta property="og:site_name" content="Yurzi’s Blog">
+<meta property="og:site_name" content="幻之梦境">
 <meta property="og:description" content="内存中字的存储        内存中一个字需要2个地址连续的内存单元来存放，字的低位字节存放在低地址单元中，高位字节存放在高地址单元中 任何2个地址连续的内存单元，N单元和N+1号单元，可以将它们看成2个内存单元，也可以看成一个地址为N的字单元中的高位字节单元和低位字节单元。 在读写中，默认指定的单元地址为低位地址">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-04T09:05:57.325Z">
@@ -12,7 +12,7 @@
 <meta property="article:tag" content="汇编">
 <meta property="article:tag" content="assembly x86_64">
 <meta property="article:tag" content="寄存器">
-<meta name="twitter:card" content="summary"><title>3-寄存器(内存访问) | Yurzi’s Blog</title><link ref="canonical" href="https://blog.yurzi.net/posts/2071e8f1/"><link rel="alternate" href="/rss.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><script src="https://www.googletagmanager.com/gtag/js?id=G-M43B6Q6Q25" async="" data-pjax=""></script><script data-pjax="">if (window.location.hostname !== 'localhost') {
+<meta name="twitter:card" content="summary"><title>3-寄存器(内存访问) | 幻之梦境</title><link ref="canonical" href="https://blog.yurzi.net/posts/2071e8f1/"><link rel="alternate" href="/rss.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><script src="https://www.googletagmanager.com/gtag/js?id=G-M43B6Q6Q25" async="" data-pjax=""></script><script data-pjax="">if (window.location.hostname !== 'localhost') {
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   gtag('js', new Date());

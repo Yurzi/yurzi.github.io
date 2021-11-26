@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Yurzi’s Blog</title>
+  <title>幻之梦境</title>
   <icon>https://blog.yurzi.net/icon.png</icon>
-  <subtitle>幻之梦境</subtitle>
+  <subtitle>Yurzi’s Blog</subtitle>
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2021-11-15T16:35:09.938Z</updated>
+  <updated>2021-11-26T11:09:27.346Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -17,11 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++多线程</title>
+    <link href="https://blog.yurzi.net/posts/9f089854/"/>
+    <id>https://blog.yurzi.net/posts/9f089854/</id>
+    <published>2021-11-17T13:33:57.814Z</published>
+    <updated>2021-11-26T11:09:27.346Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;并发-进程-线程的基本概念&quot;&gt;
+          &lt;a href=&quot;#并发-进程-线程的基本概念&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="c++" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/c/"/>
+    
+    <category term="多线程" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/c/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="技术" scheme="https://blog.yurzi.net/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="c++" scheme="https://blog.yurzi.net/tags/c/"/>
+    
+    <category term="多线程" scheme="https://blog.yurzi.net/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>dot语言学习笔记</title>
     <link href="https://blog.yurzi.net/posts/d5d87576/"/>
     <id>https://blog.yurzi.net/posts/d5d87576/</id>
     <published>2021-11-10T01:49:26.000Z</published>
-    <updated>2021-11-15T16:35:09.938Z</updated>
+    <updated>2021-11-24T01:27:12.776Z</updated>
     
     
     <summary type="html">&lt;p&gt;在学习生活中经常遇到需要绘制各种流程图，框图，UML图的情况，一种比较方便的方法就是使用&lt;strong&gt;Graphviz&lt;/strong&gt;来进行绘制，而Graphviz使用Dot语言进行解析生成，故学习dot，并作此笔记&lt;/p&gt;</summary>
@@ -627,7 +663,7 @@
     <link href="https://blog.yurzi.net/posts/7e7e02b7/"/>
     <id>https://blog.yurzi.net/posts/7e7e02b7/</id>
     <published>2021-05-09T05:46:01.000Z</published>
-    <updated>2021-06-19T13:16:38.865Z</updated>
+    <updated>2021-11-21T03:53:24.211Z</updated>
     
     
     <summary type="html">&lt;hr&gt;
