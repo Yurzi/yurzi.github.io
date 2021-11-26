@@ -6,7 +6,7 @@
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2021-11-26T11:09:27.346Z</updated>
+  <updated>2021-11-26T11:14:04.179Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -20,18 +20,43 @@
     <title>C++多线程</title>
     <link href="https://blog.yurzi.net/posts/9f089854/"/>
     <id>https://blog.yurzi.net/posts/9f089854/</id>
-    <published>2021-11-17T13:33:57.814Z</published>
-    <updated>2021-11-26T11:09:27.346Z</updated>
+    <published>2021-11-26T11:13:36.422Z</published>
+    <updated>2021-11-26T11:14:04.179Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h2 id=&quot;并发-进程-线程的基本概念&quot;&gt;
-          &lt;a href=&quot;#并发-进程-线程的基本概念&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-        
+          &lt;a href=&quot;#并发-进程-线程的基本概念&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#并发-进程-线程的基本概念&quot;&gt;&lt;/a&gt; 并发、进程、线程的基本概念&lt;/h2&gt;
       
+
+        &lt;h3 id=&quot;并发&quot;&gt;
+          &lt;a href=&quot;#并发&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#并发&quot;&gt;&lt;/a&gt; 并发&lt;/h3&gt;
+      
+&lt;p&gt;两个或多个独立的活动同时进行&lt;/p&gt;
+&lt;p&gt;并发假象：单核CPU（上下文切换方式实现并发）&lt;/p&gt;
+
+        &lt;h3 id=&quot;进程&quot;&gt;
+          &lt;a href=&quot;#进程&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#进程&quot;&gt;&lt;/a&gt; 进程&lt;/h3&gt;
+      
+&lt;p&gt;计算机中的程序关于某个数据集合上的一次运行活动（exe的运行状态）&lt;/p&gt;
+
+        &lt;h3 id=&quot;线程&quot;&gt;
+          &lt;a href=&quot;#线程&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#线程&quot;&gt;&lt;/a&gt; 线程&lt;/h3&gt;
+      
+&lt;p&gt;每个进程都有一个主线程，并有且只有一个主线程&lt;/p&gt;
+&lt;p&gt;线程可以理解为代码运行的通道，路径，程序员可以创建多个线程&lt;/p&gt;
+
+        &lt;h3 id=&quot;并发的实现&quot;&gt;
+          &lt;a href=&quot;#并发的实现&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#并发的实现&quot;&gt;&lt;/a&gt; 并发的实现&lt;/h3&gt;
+      
+&lt;ol&gt;
+&lt;li&gt;多进程间实现并发：主要解决进程间通信的问题
+&lt;ol&gt;
+&lt;li&gt;同一主机上：管道、文件、消息队列、内存共享&lt;/li&gt;
+&lt;li&gt;不同主机上：通过SOCKET网络通信实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;单个进程，多个线程实现并发，就是一个主线程多个子线程实现。一个进程中的所有线程共享部分内存空间，例如，全局变量、指针引用&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
