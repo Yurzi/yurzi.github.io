@@ -6,7 +6,7 @@
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2021-11-26T11:14:04.179Z</updated>
+  <updated>2021-12-03T03:18:23.482Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -15,6 +15,125 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一个Maven项目</title>
+    <link href="https://blog.yurzi.net/posts/baed3e78/"/>
+    <id>https://blog.yurzi.net/posts/baed3e78/</id>
+    <published>2021-12-02T13:34:54.392Z</published>
+    <updated>2021-12-03T03:18:23.482Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;手工创建&quot;&gt;
+          &lt;a href=&quot;#手工创建&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#手工创建&quot;&gt;&lt;/a&gt; 手工创建&lt;/h2&gt;
+      
+&lt;p&gt;为了能更加清晰的了解Maven项目的结构，对其进行手工配置。&lt;/p&gt;
+
+        &lt;h3 id=&quot;创建目录结构&quot;&gt;
+          &lt;a href=&quot;#创建目录结构&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#创建目录结构&quot;&gt;&lt;/a&gt; 创建目录结构&lt;/h3&gt;
+      
+&lt;center&gt;&lt;img src=&quot;/posts/baed3e78/image-20211202234304731.png&quot; alt=&quot;image-20211202213552099&quot; style=&quot;zoom:80%;&quot;&gt;&lt;/center&gt;
+&lt;p&gt;这是一般项目工程的结构，而java-project才将作为Maven工程结构的根目录。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/Maven/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven基础概念</title>
+    <link href="https://blog.yurzi.net/posts/750d92c7/"/>
+    <id>https://blog.yurzi.net/posts/750d92c7/</id>
+    <published>2021-12-02T12:34:09.251Z</published>
+    <updated>2021-12-02T13:36:44.667Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;仓库&quot;&gt;
+          &lt;a href=&quot;#仓库&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#仓库&quot;&gt;&lt;/a&gt; 仓库&lt;/h2&gt;
+      
+&lt;p&gt;仓库用于存储资源，包含各种jar包。本地机器上默认不会有jar包，大部分jar包存储于云端的&lt;strong&gt;中央&lt;/strong&gt;服务器，称为&lt;a href=&quot;https://repo1.maven.org/maven2/&quot;&gt;&lt;strong&gt;中央仓库&lt;/strong&gt;&lt;/a&gt;，主要是Maven维护的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/Maven/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven下载和配置</title>
+    <link href="https://blog.yurzi.net/posts/dbfe021a/"/>
+    <id>https://blog.yurzi.net/posts/dbfe021a/</id>
+    <published>2021-12-02T12:07:52.711Z</published>
+    <updated>2021-12-02T12:34:05.845Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;maven的下载和安装&quot;&gt;
+          &lt;a href=&quot;#maven的下载和安装&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#maven的下载和安装&quot;&gt;&lt;/a&gt; Maven的下载和安装&lt;/h2&gt;
+      
+&lt;p&gt;从[官网](&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot; href=&quot;https://maven.apache.org/&quot;&gt;Maven – Welcome to Apache Maven&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;)下载对应版本的bin后缀的压缩包，后解压到合适目录下，即完成安装。&lt;/p&gt;
+&lt;p&gt;Maven的安装并不具备安装器(Installer)，只靠手工解压到对应目录即可完成。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/Maven/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven简介</title>
+    <link href="https://blog.yurzi.net/posts/72fa4023/"/>
+    <id>https://blog.yurzi.net/posts/72fa4023/</id>
+    <published>2021-12-02T11:48:28.243Z</published>
+    <updated>2021-12-02T13:36:17.290Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;maven是什么&quot;&gt;
+          &lt;a href=&quot;#maven是什么&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#maven是什么&quot;&gt;&lt;/a&gt; Maven是什么&lt;/h2&gt;
+      
+&lt;p&gt;Maven的本质的是一个项目管理工具，将项目开发和管理过程抽象成一个项目对象模型(&lt;strong&gt;P&lt;/strong&gt;roject &lt;strong&gt;O&lt;/strong&gt;bject &lt;strong&gt;M&lt;/strong&gt;odel，&lt;strong&gt;POM&lt;/strong&gt;)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/Java/Maven/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Maven" scheme="https://blog.yurzi.net/tags/Maven/"/>
+    
+  </entry>
   
   <entry>
     <title>C++多线程</title>
@@ -94,9 +213,9 @@
     <category term="dot" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/dot/"/>
     
     
-    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
-    
     <category term="dot" scheme="https://blog.yurzi.net/tags/dot/"/>
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -680,150 +799,6 @@
     <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     <category term="总结" scheme="https://blog.yurzi.net/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最大连续子序列和</title>
-    <link href="https://blog.yurzi.net/posts/7e7e02b7/"/>
-    <id>https://blog.yurzi.net/posts/7e7e02b7/</id>
-    <published>2021-05-09T05:46:01.000Z</published>
-    <updated>2021-11-21T03:53:24.211Z</updated>
-    
-    
-    <summary type="html">&lt;hr&gt;
-
-        &lt;h2 id=&quot;题目最喜爱的序列&quot;&gt;
-          &lt;a href=&quot;#题目最喜爱的序列&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#题目最喜爱的序列&quot;&gt;&lt;/a&gt; 题目:最喜爱的序列&lt;/h2&gt;
-      
-&lt;p&gt;小唐这段时间在研究序列。拿来N个整数的序列，他给序列中的每个整数都赋予一个喜爱值。喜爱值也是整数，有正有负，越大表明越喜欢。他想知道，如何从序列中连续取最多m个数，他获得喜爱值最大。1≤N≤500000，1≤m≤N。&lt;/p&gt;
-
-        &lt;h3 id=&quot;输入格式&quot;&gt;
-          &lt;a href=&quot;#输入格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入格式&quot;&gt;&lt;/a&gt; 输入格式&lt;/h3&gt;
-      
-&lt;p&gt;第一行是两个整数N,m。分别代表序列中数的个数以及能取的最多个数。&lt;br&gt;
-第二行用空格隔开的N个整数，第i个整数Li代表他对第i个数的喜爱值。│Li│≤1000&lt;/p&gt;
-
-        &lt;h3 id=&quot;输出格式&quot;&gt;
-          &lt;a href=&quot;#输出格式&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出格式&quot;&gt;&lt;/a&gt; 输出格式&lt;/h3&gt;
-      
-&lt;p&gt;一行，三个数，表示获得最大喜爱值，及第一个取最大喜爱值的区间。&lt;/p&gt;
-
-        &lt;h3 id=&quot;输入样例&quot;&gt;
-          &lt;a href=&quot;#输入样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输入样例&quot;&gt;&lt;/a&gt; 输入样例&lt;/h3&gt;
-      
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;5 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 4 5 2 3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
-
-        &lt;h3 id=&quot;输出样例&quot;&gt;
-          &lt;a href=&quot;#输出样例&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#输出样例&quot;&gt;&lt;/a&gt; 输出样例&lt;/h3&gt;
-      
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;9 2 3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="数据结构与算法" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="应用" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BA%94%E7%94%A8/"/>
-    
-    <category term="最大连续子序列的和" scheme="https://blog.yurzi.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BA%94%E7%94%A8/%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%92%8C/"/>
-    
-    
-    <category term="数据结构与算法" scheme="https://blog.yurzi.net/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="应用" scheme="https://blog.yurzi.net/tags/%E5%BA%94%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>个人博客搭建历程</title>
-    <link href="https://blog.yurzi.net/posts/bf7e5576/"/>
-    <id>https://blog.yurzi.net/posts/bf7e5576/</id>
-    <published>2021-05-01T13:41:33.000Z</published>
-    <updated>2021-06-19T13:16:38.856Z</updated>
-    
-    
-    <summary type="html">&lt;hr&gt;
-
-        &lt;h2 id=&quot;萌芽&quot;&gt;
-          &lt;a href=&quot;#萌芽&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#萌芽&quot;&gt;&lt;/a&gt; 萌芽&lt;/h2&gt;
-      
-&lt;p&gt;第一次想到要搭建一个个人主页是在7年前，当时看到有个B站的up主整了个个人主页来发布资源，我就想着我也想并应该能整一个。于是乎一场历时将近7年的技术积累开始了。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="经历" scheme="https://blog.yurzi.net/categories/%E7%BB%8F%E5%8E%86/"/>
-    
-    
-    <category term="Linux" scheme="https://blog.yurzi.net/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>洛玖只的学生日常-第一章</title>
-    <link href="https://blog.yurzi.net/posts/b78dffe7/"/>
-    <id>https://blog.yurzi.net/posts/b78dffe7/</id>
-    <published>2021-05-01T04:39:22.000Z</published>
-    <updated>2021-06-19T13:16:38.867Z</updated>
-    
-    
-    <summary type="html">&lt;hr&gt;
-
-        &lt;h2 id=&quot;九阳豆浆机&quot;&gt;
-          &lt;a href=&quot;#九阳豆浆机&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#九阳豆浆机&quot;&gt;&lt;/a&gt; 九阳豆浆机&lt;/h2&gt;
-      
-&lt;p&gt;相传在上古时期，后羿射日之时，天上的九个太阳落下后，汇聚起来化作了一台豆浆机，拥有可怕的威能。&lt;br&gt;
-这台豆浆机，自出现后，便再无音讯，遗失在苍茫的宇宙中，难以寻觅，是为传说中的上古先天神器。&lt;/p&gt;
-&lt;p&gt;而现在，在这教室里，九阳豆浆机就在考列考拉夫斯基的手上，并向我们炫耀其造型之精美。我们虽然对此感到怀疑，但是其造型确实精美好看，&lt;br&gt;
-寒冬的阳光，透过朦胧的紧闭的玻璃窗，在了豆浆机上，让洁白的陶瓷质的光滑外壳，亮的有些闪眼；&lt;br&gt;
-镀银的提手，低调奢华有内涵；盖子银质镶圈，带有一个用金丝勾勒出的九阳界面，&lt;br&gt;
-在封闭的教室中，在水汽的氤氲下，显得十分的富丽堂皇，并有一种仙气，超然脱俗。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="小说" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="洛玖只的日常" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/"/>
-    
-    <category term="第一章" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
-    
-    
-    <category term="小说" scheme="https://blog.yurzi.net/tags/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="洛玖只的学生日常" scheme="https://blog.yurzi.net/tags/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E5%AD%A6%E7%94%9F%E6%97%A5%E5%B8%B8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>洛玖只的学生日常-前言</title>
-    <link href="https://blog.yurzi.net/posts/c96fa57/"/>
-    <id>https://blog.yurzi.net/posts/c96fa57/</id>
-    <published>2021-05-01T04:29:50.000Z</published>
-    <updated>2021-06-19T13:16:38.866Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;hr&gt;
-
-        &lt;h2 id=&quot;写在前面&quot;&gt;
-          &lt;a href=&quot;#写在前面&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="小说" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="洛玖只的日常" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/"/>
-    
-    <category term="前言" scheme="https://blog.yurzi.net/categories/%E5%B0%8F%E8%AF%B4/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E6%97%A5%E5%B8%B8/%E5%89%8D%E8%A8%80/"/>
-    
-    
-    <category term="小说" scheme="https://blog.yurzi.net/tags/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="洛玖只的学生日常" scheme="https://blog.yurzi.net/tags/%E6%B4%9B%E7%8E%96%E5%8F%AA%E7%9A%84%E5%AD%A6%E7%94%9F%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
