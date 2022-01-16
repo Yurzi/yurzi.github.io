@@ -6,7 +6,7 @@
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2022-01-16T10:36:28.277Z</updated>
+  <updated>2022-01-16T10:37:20.568Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.yurzi.net/posts/791aad20/"/>
     <id>https://blog.yurzi.net/posts/791aad20/</id>
     <published>2022-01-15T07:27:50.090Z</published>
-    <updated>2022-01-16T10:36:28.277Z</updated>
+    <updated>2022-01-16T10:37:20.568Z</updated>
     
     
     <summary type="html">&lt;p&gt;在编写程序的过程中时常会用到标准输入输出(Standard IO)，例如C里的printf、scanf，C++里的std::cin和std::cout，java中的system.out等。对于这些输入输出，一般情况下，我们最直观的感受就是，会在终端上进行输入输出。但对于其背后的原理知之甚少。本文将对其背后的原理进行一些抽象的梳理，自下而上和自上而下2个角度来了解标准输入输出。&lt;/p&gt;</summary>
@@ -78,7 +78,7 @@
     <link href="https://blog.yurzi.net/posts/750d92c7/"/>
     <id>https://blog.yurzi.net/posts/750d92c7/</id>
     <published>2021-12-02T12:34:09.251Z</published>
-    <updated>2022-01-12T06:50:55.386Z</updated>
+    <updated>2022-01-16T10:41:48.424Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;仓库&quot;&gt;
@@ -135,7 +135,7 @@
     <link href="https://blog.yurzi.net/posts/72fa4023/"/>
     <id>https://blog.yurzi.net/posts/72fa4023/</id>
     <published>2021-12-02T11:48:28.243Z</published>
-    <updated>2022-01-12T06:50:55.381Z</updated>
+    <updated>2022-01-16T10:42:36.510Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;maven是什么&quot;&gt;
@@ -236,9 +236,9 @@
     <category term="dot" scheme="https://blog.yurzi.net/categories/%E7%AC%94%E8%AE%B0/dot/"/>
     
     
-    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
-    
     <category term="dot" scheme="https://blog.yurzi.net/tags/dot/"/>
+    
+    <category term="笔记" scheme="https://blog.yurzi.net/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
