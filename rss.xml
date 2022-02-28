@@ -6,7 +6,7 @@
   <link href="https://blog.yurzi.net/rss.xml" rel="self"/>
   
   <link href="https://blog.yurzi.net/"/>
-  <updated>2022-02-28T14:59:54.798Z</updated>
+  <updated>2022-02-28T15:33:53.697Z</updated>
   <id>https://blog.yurzi.net/</id>
   
   <author>
@@ -21,10 +21,15 @@
     <link href="https://blog.yurzi.net/posts/522bf98d/"/>
     <id>https://blog.yurzi.net/posts/522bf98d/</id>
     <published>2022-02-28T14:59:54.000Z</published>
-    <updated>2022-02-28T14:59:54.798Z</updated>
+    <updated>2022-02-28T15:33:53.697Z</updated>
     
     
-    <summary type="html">&lt;hr&gt;</summary>
+    <summary type="html">&lt;hr&gt;
+
+        &lt;h2 id=&quot;起因&quot;&gt;
+          &lt;a href=&quot;#起因&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#起因&quot;&gt;&lt;/a&gt; 起因&lt;/h2&gt;
+      
+&lt;p&gt;近日，因为实在接受不了机械硬盘的随机读写性能，于是换了块固态。但本着充分利用的原则~~（穷）~~，将其置入硬盘盒作为外置硬盘用USB连接电脑，但这样一来，笔电本来不多的USB接口就用完了（悲)。而我又经常需要往手机上传文件，而且也偏好使用终端。于是就有了这个念头&lt;/p&gt;</summary>
     
     
     
